@@ -3,20 +3,20 @@ import ContentBlocks from "../components/ContentBlocks.astro";
 import Layout from "../layouts/Layout.astro";
 import { getContentSnapshot, type CmsEntry } from "../lib/cms";
 
-const reservedSlugs = new Set([
-  "o-firmie",
-  "generalne-wykonawstwo",
-  "specjalizacje-hale-biurowe",
-  "specjalizacje-obiekty-przemyslowe",
-  "specjalizacje-izolacje-pur",
-  "specjalizacje-sucha-zabudowa",
-  "realizacje",
-  "proces",
-  "kontakt",
-  "blog",
-]);
-
 export async function getStaticPaths() {
+  const reservedSlugs = new Set([
+    "home",
+    "o-firmie",
+    "generalne-wykonawstwo",
+    "specjalizacje-hale-biurowe",
+    "specjalizacje-obiekty-przemyslowe",
+    "specjalizacje-izolacje-pur",
+    "specjalizacje-sucha-zabudowa",
+    "realizacje",
+    "proces",
+    "kontakt",
+    "blog",
+  ]);
   const snapshot = await getContentSnapshot();
   return snapshot.pages
     .filter((page) => !reservedSlugs.has(page.slug))
