@@ -62,6 +62,89 @@
     });
   }
 
+  /* ---------- hero video: do przodu natywnie, cofanie bez kolejki seeków ---------- */
+  var heroVideo = document.querySelector(".hero-video");
+  if (heroVideo && !reducedMotion) {
+    var reversing = false;
+    var reverseStep = 1 / 24; /* ~1 klatka przy 24 fps — płynne cofanie */
+
+    function playForward() {
+      reversing = false;
+      heroVideo.playbackRate = 1;
+      if (heroVideo.currentTime > 0.02) heroVideo.currentTime = 0;
+      var p = heroVideo.play();
+      if (p && typeof p.catch === "function") p.catch(function () {});
+    }
+
+    function onSeekedReverse() {
+      heroVideo.removeEventListener("seeked", onSeekedReverse);
+      if (!reversing) return;
+
+      if (heroVideo.currentTime <= reverseStep) {
+        playForward();
+        return;
+      }
+
+      var next = Math.max(0, heroVideo.currentTime - reverseStep);
+      heroVideo.addEventListener("seeked", onSeekedReverse);
+      try {
+        if (typeof heroVideo.fastSeek === "function") heroVideo.fastSeek(next);
+        else heroVideo.currentTime = next;
+      } catch (e) {
+        heroVideo.currentTime = next;
+      }
+    }
+
+    function startReverse() {
+      if (reversing) return;
+      reversing = true;
+      heroVideo.pause();
+      /* od razu pierwszy krok wstecz — bez czekania na ended / buforowanie pustki */
+      var startAt = Math.max(0, (heroVideo.duration || heroVideo.currentTime) - reverseStep);
+      heroVideo.addEventListener("seeked", onSeekedReverse);
+      try {
+        if (typeof heroVideo.fastSeek === "function") heroVideo.fastSeek(startAt);
+        else heroVideo.currentTime = startAt;
+      } catch (e) {
+        heroVideo.currentTime = startAt;
+      }
+    }
+
+    function onTimeUpdate() {
+      if (reversing) return;
+      var duration = heroVideo.duration;
+      if (!duration || !isFinite(duration)) return;
+      /* zawróć tuż przed końcem — unikamy pauzy na zdarzeniu ended */
+      if (heroVideo.currentTime >= duration - 0.12) startReverse();
+    }
+
+    heroVideo.loop = false;
+    heroVideo.muted = true;
+    heroVideo.preload = "auto";
+    heroVideo.addEventListener("timeupdate", onTimeUpdate);
+
+    function startWhenReady() {
+      /* dociągnij cały plik, żeby pierwsze cofanie nie czekało na sieć */
+      if (heroVideo.buffered.length) {
+        var end = heroVideo.buffered.end(heroVideo.buffered.length - 1);
+        if (heroVideo.duration && end >= heroVideo.duration - 0.25) {
+          playForward();
+          return;
+        }
+      }
+      if (heroVideo.readyState >= 3) playForward();
+    }
+
+    heroVideo.addEventListener("canplaythrough", function onReady() {
+      heroVideo.removeEventListener("canplaythrough", onReady);
+      playForward();
+    });
+    heroVideo.addEventListener("progress", startWhenReady);
+
+    if (heroVideo.readyState >= 3) playForward();
+    else heroVideo.load();
+  }
+
   /* ---------- GSAP ---------- */
   if (!hasGsap || reducedMotion) {
     document.documentElement.classList.add("reduced-motion");
