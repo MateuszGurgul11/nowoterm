@@ -18,7 +18,18 @@ function formatArea(area: number | null | undefined): string | null {
 <main>
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-media" aria-hidden="true"></div>
+      <div class="hero-media" aria-hidden="true">
+        <video
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        >
+          <source src="/assets/panorama-miasta.mp4" type="video/mp4" />
+        </video>
+      </div>
 
       <p class="hero-note" data-hero>
         Generalny wykonawca wykończeń obiektów komercyjnych.<br>

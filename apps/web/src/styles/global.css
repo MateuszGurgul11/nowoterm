@@ -212,19 +212,30 @@ body.nav-open .nav-toggle::after { top: 21px; transform: rotate(-45deg); }
 /* miejsce na docelowe zdjęcie/film: tło + przyciemnienie */
 .hero-media {
   position: absolute; inset: 0;
-  background:
-    radial-gradient(1200px 700px at 50% 118%, rgba(189, 132, 71, 0.12), transparent 60%),
-    linear-gradient(180deg, #101317 0%, #0c0e11 55%, #0a0c0f 100%);
+  background: #0a0c0f;
+}
+.hero-video {
+  position: absolute; inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 .hero-media::after {
-  /* subtelna sylwetka hali — do zastąpienia fotografią */
   content: "";
-  position: absolute; inset: auto 0 0 0; height: 46%;
+  position: absolute; inset: 0; z-index: 1;
   background:
-    linear-gradient(0deg, rgba(255,255,255,0.045) 1px, transparent 1px) 0 100% / 100% 25% no-repeat,
-    linear-gradient(90deg, transparent 12%, rgba(255,255,255,0.03) 12.5%, rgba(255,255,255,0.03) 13%, transparent 13.5%),
-    linear-gradient(90deg, transparent 86%, rgba(255,255,255,0.03) 86.5%, rgba(255,255,255,0.03) 87%, transparent 87.5%);
-  mask-image: linear-gradient(180deg, transparent, #000 40%);
+    linear-gradient(180deg, rgba(10, 12, 15, 0.55) 0%, rgba(10, 12, 15, 0.42) 45%, rgba(10, 12, 15, 0.72) 100%),
+    radial-gradient(1200px 700px at 50% 118%, rgba(189, 132, 71, 0.14), transparent 60%);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-video { display: none; }
+  .hero-media {
+    background:
+      radial-gradient(1200px 700px at 50% 118%, rgba(189, 132, 71, 0.12), transparent 60%),
+      linear-gradient(180deg, #101317 0%, #0c0e11 55%, #0a0c0f 100%);
+  }
 }
 
 .hero-note {
