@@ -1,0 +1,71 @@
+---
+import Layout from "../layouts/Layout.astro";
+const title = "Dla inwestorów — proces wyceny, harmonogram, nadzór | Novoterm Budownictwo";
+const description = "Jak pracujemy z inwestorami: etapy wyceny, harmonogram rzeczowo-finansowy, nadzór budowy, raportowanie i odbiór z dokumentacją powykonawczą.";
+---
+
+<Layout {title} {description} solidHeader={true}>
+<main>
+    <section class="page-hero">
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Okruszki"><a href="/">Novoterm</a> <span class="sep">/</span> <span>Dla inwestorów</span></nav>
+        <h1 data-hero>Przewidywalny proces. Zero niespodzianek.</h1>
+        <p class="lead" data-hero>Inwestor komercyjny nie kupuje obietnic — kupuje przewidywalność. Każdy etap współpracy ma zdefiniowany rezultat, termin i dokument.</p>
+        <span class="rule" data-hero></span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap--narrow">
+        <div class="section-head">
+          <span class="label" data-reveal>Etap 1</span>
+          <h2 class="h-lg" data-reveal>Wycena</h2>
+        </div>
+        <table class="spec-table" data-reveal>
+          <tr><th>Co przekazujesz</th><td>Dokumentację projektową (lub zapraszasz na wizję lokalną), oczekiwany standard i termin</td></tr>
+          <tr><th>Co otrzymujesz</th><td>Kosztorys ofertowy z podziałem na branże i etapy, propozycję harmonogramu, warunki płatności</td></tr>
+          <tr><th>Termin</th><td>5 dni roboczych dla typowych zakresów; projekty GW — do 10 dni</td></tr>
+          <tr><th>Koszt</th><td>Wycena bezpłatna i niezobowiązująca</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="label" data-reveal>Etap 2</span>
+          <h2 class="h-lg" data-reveal>Harmonogram i kontrakt</h2>
+        </div>
+        <div class="info-cards">
+          <div class="info-card" data-reveal><span class="ic-label">Harmonogram</span><h3>Rzeczowo-finansowy</h3><p>Każda pozycja kosztorysu ma termin i wartość — postęp prac widzisz w zestawieniu.</p></div>
+          <div class="info-card" data-reveal><span class="ic-label">Płatności</span><h3>Kamienie milowe</h3><p>Rozliczenia powiązane z odebranymi etapami. Żadnych zaliczek oderwanych od postępu.</p></div>
+          <div class="info-card" data-reveal><span class="ic-label">Zabezpieczenia</span><h3>Kary i gwarancje w umowie</h3><p>Standardy kontraktowe znane z rynku komercyjnego — bez negocjowania oczywistości.</p></div>
+          <div class="info-card" data-reveal><span class="ic-label">Zmiany</span><h3>Procedura zmian zakresu</h3><p>Roboty dodatkowe tylko po pisemnym zatwierdzeniu wyceny — budżet pod kontrolą.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="label" data-reveal>Etap 3</span>
+          <h2 class="h-lg" data-reveal>Nadzór budowy i odbiór</h2>
+        </div>
+        <div class="steps" style="grid-template-columns:repeat(4,1fr)">
+          <div class="step" data-reveal><span class="step-no">01</span><h3>Kierownik projektu</h3><p>Jedna osoba kontaktowa odpowiedzialna za całość — od mobilizacji po odbiór.</p></div>
+          <div class="step" data-reveal><span class="step-no">02</span><h3>Raporty tygodniowe</h3><p>Postęp rzeczowy, budżet, ryzyka i decyzje do podjęcia — co tydzień na mail.</p></div>
+          <div class="step" data-reveal><span class="step-no">03</span><h3>Kontrola jakości</h3><p>Odbiory robót zanikających dokumentowane protokołami i zdjęciami.</p></div>
+          <div class="step" data-reveal><span class="step-no">04</span><h3>Odbiór końcowy</h3><p>Dokumentacja powykonawcza, atesty, warunki gwarancji.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <span class="label" data-reveal>Kontakt</span>
+        <h2 data-reveal>Prześlij dokumentację — ofertę otrzymasz w 5 dni roboczych</h2>
+        <a class="btn btn--light" href="/kontakt" data-reveal>Zapytanie ofertowe</a>
+      </div>
+    </section>
+  </main>
+</Layout>

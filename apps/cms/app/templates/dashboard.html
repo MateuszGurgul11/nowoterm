@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Panel — Novoterm CMS{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div>
+    <p class="eyebrow">Treści strony</p>
+    <h1>Panel Novoterm</h1>
+  </div>
+  <form method="post" action="/admin/publish">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <button class="button button--accent" type="submit">Opublikuj na Vercel</button>
+  </form>
+</div>
+
+{% if request.query_params.get("published") %}
+<div class="success">Build Vercel został uruchomiony. Publiczna strona nadal działa ze starego cache do zakończenia publikacji.</div>
+{% endif %}
+
+<section class="stats">
+  <article><strong>{{ page_count }}</strong><span>stron</span></article>
+  <article><strong>{{ project_count }}</strong><span>realizacji</span></article>
+</section>
+
+<section class="panel">
+  <div class="panel-head">
+    <h2>Strony</h2>
+    <a class="button button--small" href="/admin/pages/new">Dodaj stronę</a>
+  </div>
+  <div class="content-list">
+    {% for page in pages %}
+    <a href="/admin/pages/{{ page.id }}/edit">
+      <span><strong>{{ page.title }}</strong><small>/{{ page.slug }}</small></span>
+      <span class="status status--{{ page.status.value }}">{{ page.status.value }}</span>
+    </a>
+    {% else %}
+    <p class="empty">Brak stron w CMS. Obecny frontend nadal korzysta z treści zmigrowanych z HTML.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-head">
+    <h2>Realizacje</h2>
+    <a class="button button--small" href="/admin/projects/new">Dodaj realizację</a>
+  </div>
+  <div class="content-list">
+    {% for project in projects %}
+    <a href="/admin/projects/{{ project.id }}/edit">
+      <span><strong>{{ project.title }}</strong><small>{{ project.category }} · {{ project.location or "bez lokalizacji" }}</small></span>
+      <span class="status status--{{ project.status.value }}">{{ project.status.value }}</span>
+    </a>
+    {% else %}
+    <p class="empty">Dodaj pierwszą realizację, aby przygotować przyszłe case study.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

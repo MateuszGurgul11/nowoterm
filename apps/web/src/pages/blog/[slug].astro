@@ -1,0 +1,40 @@
+---
+import ContentBlocks from "../../components/ContentBlocks.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getContentSnapshot, type CmsPost } from "../../lib/cms";
+
+export async function getStaticPaths() {
+  const snapshot = await getContentSnapshot();
+  return snapshot.posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CmsPost;
+}
+
+const { post } = Astro.props;
+---
+
+<Layout title={post.seo_title} description={post.seo_description} solidHeader={true} type="article">
+  <main>
+    <article>
+      <header class="page-hero">
+        <div class="wrap">
+          <nav class="crumbs" aria-label="Okruszki">
+            <a href="/">Novoterm</a><span class="sep">/</span>
+            <a href="/blog">Blog</a><span class="sep">/</span>
+            <span>{post.title}</span>
+          </nav>
+          <div class="label" data-hero>{post.tags.join(" · ")}</div>
+          <h1 data-hero>{post.title}</h1>
+          <p class="lead" data-hero>{post.excerpt}</p>
+          <span class="rule" data-hero></span>
+        </div>
+      </header>
+      <ContentBlocks blocks={post.content.blocks} />
+    </article>
+  </main>
+</Layout>

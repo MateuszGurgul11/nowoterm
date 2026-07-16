@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: novoterm-cms
+    runtime: python
+    plan: free
+    rootDir: apps/cms
+    buildCommand: pip install --no-cache-dir -r requirements.lock
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health/live
+    autoDeployTrigger: commit
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.3
+      - key: ENVIRONMENT
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: EXPORT_TOKEN
+        generateValue: true
+      - key: VERCEL_DEPLOY_HOOK
+        sync: false
+      - key: SUPABASE_URL
+        value: https://hasyqhncdnpwikxeczib.supabase.co
+      - key: SUPABASE_PUBLISHABLE_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SUPABASE_MEDIA_BUCKET
+        value: media

@@ -1,0 +1,44 @@
+---
+import ContentBlocks from "../components/ContentBlocks.astro";
+import Layout from "../layouts/Layout.astro";
+import { getContentSnapshot, type CmsEntry } from "../lib/cms";
+
+const reservedSlugs = new Set([
+  "o-firmie",
+  "generalne-wykonawstwo",
+  "specjalizacje-hale-biurowe",
+  "specjalizacje-obiekty-przemyslowe",
+  "specjalizacje-izolacje-pur",
+  "specjalizacje-sucha-zabudowa",
+  "realizacje",
+  "proces",
+  "kontakt",
+  "blog",
+]);
+
+export async function getStaticPaths() {
+  const snapshot = await getContentSnapshot();
+  return snapshot.pages
+    .filter((page) => !reservedSlugs.has(page.slug))
+    .map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+
+interface Props {
+  page: CmsEntry;
+}
+
+const { page } = Astro.props;
+---
+
+<Layout title={page.seo_title} description={page.seo_description} solidHeader={true}>
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Okruszki"><a href="/">Novoterm</a> <span class="sep">/</span> <span>{page.title}</span></nav>
+        <h1 data-hero>{page.title}</h1>
+        <span class="rule" data-hero></span>
+      </div>
+    </section>
+    <ContentBlocks blocks={page.content.blocks} />
+  </main>
+</Layout>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 120" fill="none" role="img" aria-label="Novoterm Budownictwo">
+  <!-- Monogram NB — moduł siatki konstrukcyjnej (Kierunek A) -->
+  <g>
+    <rect x="6" y="6" width="108" height="108" stroke="#8B98A9" stroke-width="3"/>
+    <!-- siatka -->
+    <line x1="6" y1="42" x2="114" y2="42" stroke="#8B98A9" stroke-width="1" opacity=".35"/>
+    <line x1="6" y1="78" x2="114" y2="78" stroke="#8B98A9" stroke-width="1" opacity=".35"/>
+    <line x1="42" y1="6" x2="42" y2="114" stroke="#8B98A9" stroke-width="1" opacity=".35"/>
+    <line x1="78" y1="6" x2="78" y2="114" stroke="#8B98A9" stroke-width="1" opacity=".35"/>
+    <!-- stężenie / rama -->
+    <path d="M24 96 L96 24" stroke="#FF6B1C" stroke-width="6"/>
+    <!-- N -->
+    <path d="M24 96 V24 L60 66 V24" stroke="#F2F5F8" stroke-width="9" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+    <!-- B -->
+    <path d="M74 24 V96 H92 C101 96 106 90 106 82 C106 74 101 70 94 69 C100 68 104 63 104 56 C104 48 99 24 88 24 Z" stroke="#F2F5F8" stroke-width="0" fill="none"/>
+    <path d="M74 26 V94 H90 Q104 94 104 80 Q104 69 92 67 Q102 65 102 52 Q102 40 90 40 H74 M74 67 H92" stroke="#F2F5F8" stroke-width="8" fill="none" stroke-linejoin="miter"/>
+    <!-- węzeł -->
+    <circle cx="96" cy="24" r="6" fill="#FF6B1C"/>
+  </g>
+  <!-- Wordmark -->
+  <g fill="#F2F5F8">
+    <text x="140" y="66" font-family="Archivo, Arial, sans-serif" font-size="52" font-weight="800" letter-spacing="2" style="font-stretch:125%">NOVOTERM</text>
+    <text x="142" y="100" font-family="'IBM Plex Mono', monospace" font-size="21" font-weight="500" letter-spacing="11.5" fill="#8B98A9">BUDOWNICTWO</text>
+  </g>
+</svg>

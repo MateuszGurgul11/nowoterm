@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{ "Edytuj" if project else "Dodaj" }} realizację — Novoterm CMS{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><p class="eyebrow">Portfolio</p><h1>{{ "Edytuj realizację" if project else "Nowa realizacja" }}</h1></div>
+  <a class="back-link" href="/admin">Wróć do panelu</a>
+</div>
+{% if error %}<div class="alert"><strong>Popraw dane:</strong> {{ error }}</div>{% endif %}
+<form class="editor" method="post" action="/admin/projects/save">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  {% if project %}<input type="hidden" name="project_id" value="{{ project.id }}">{% endif %}
+  <div class="editor-grid">
+    <section class="panel form-stack">
+      <h2>Realizacja</h2>
+      <label>Tytuł<input name="title" required value="{{ project.title if project else '' }}"></label>
+      <label>Slug<input name="slug" required pattern="[a-z0-9]+(?:-[a-z0-9]+)*" value="{{ project.slug if project else '' }}"></label>
+      <div class="two-fields">
+        <label>Kategoria<input name="category" required value="{{ project.category if project else '' }}"></label>
+        <label>Lokalizacja<input name="location" value="{{ project.location if project and project.location else '' }}"></label>
+      </div>
+      <label>Krótki opis<textarea name="excerpt" rows="4">{{ project.excerpt if project else '' }}</textarea></label>
+      <label>Treść (JSON)<textarea name="content_json" rows="13" required>{{ content_json }}</textarea></label>
+      <label>Galeria (JSON)<textarea name="gallery_json" rows="8" required>{{ gallery_json }}</textarea></label>
+    </section>
+    <aside class="panel form-stack">
+      <h2>Publikacja i SEO</h2>
+      <label>Status
+        <select name="content_status">
+          {% for value in ["draft", "published", "archived"] %}
+          <option value="{{ value }}" {% if project and project.status.value == value %}selected{% endif %}>{{ value }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>SEO title <span class="hint">maks. 70 znaków</span><input name="seo_title" maxlength="70" required value="{{ project.seo_title if project else '' }}"></label>
+      <label>SEO description <span class="hint">maks. 180 znaków</span><textarea name="seo_description" maxlength="180" rows="5" required>{{ project.seo_description if project else '' }}</textarea></label>
+      <button class="button button--accent" type="submit">Zapisz realizację</button>
+    </aside>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,51 @@
+---
+import ContentBlocks from "../../components/ContentBlocks.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getContentSnapshot, type CmsCaseStudy } from "../../lib/cms";
+
+export async function getStaticPaths() {
+  const snapshot = await getContentSnapshot();
+  return snapshot.case_studies.map((caseStudy) => ({
+    params: { slug: caseStudy.slug },
+    props: { caseStudy },
+  }));
+}
+
+interface Props {
+  caseStudy: CmsCaseStudy;
+}
+
+const { caseStudy } = Astro.props;
+---
+
+<Layout title={caseStudy.seo_title} description={caseStudy.seo_description} solidHeader={true} type="article">
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Okruszki"><a href="/">Novoterm</a> <span class="sep">/</span> <span>Case study</span></nav>
+        <span class="label" data-hero>Case study</span>
+        <h1 data-hero>{caseStudy.title}</h1>
+        <p class="lead" data-hero>{caseStudy.challenge}</p>
+        <span class="rule" data-hero></span>
+      </div>
+    </section>
+    {
+      caseStudy.results.length > 0 && (
+        <section class="results-band">
+          <div class="wrap">
+            {caseStudy.results.map((result) => <div><strong>{result.value}</strong><span>{result.label}</span></div>)}
+          </div>
+        </section>
+      )
+    }
+    <ContentBlocks blocks={caseStudy.solution.blocks} />
+  </main>
+</Layout>
+
+<style>
+  .results-band { padding-block: 38px; color: var(--dark-text); background: var(--dark); }
+  .results-band .wrap { display: flex; gap: clamp(30px, 8vw, 100px); flex-wrap: wrap; }
+  .results-band div { display: grid; gap: 2px; }
+  .results-band strong { font-size: clamp(25px, 4vw, 44px); font-weight: 250; }
+  .results-band span { color: var(--dark-muted); }
+</style>

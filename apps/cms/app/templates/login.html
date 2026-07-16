@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Logowanie — Novoterm CMS{% endblock %}
+{% block content %}
+<section class="auth-card">
+  <p class="eyebrow">Panel redakcyjny</p>
+  <h1>Zaloguj się</h1>
+  <p>Treści opublikowane w panelu trafią do statycznej strony na Vercel.</p>
+  {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+  <form method="post" action="/admin/login" class="form-stack">
+    <label>Email<input name="email" type="email" autocomplete="username" required autofocus></label>
+    <label>Hasło<input name="password" type="password" autocomplete="current-password" required></label>
+    <button class="button" type="submit">Zaloguj się</button>
+  </form>
+</section>
+{% endblock %}

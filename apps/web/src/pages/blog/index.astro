@@ -1,0 +1,44 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getContentSnapshot } from "../../lib/cms";
+
+const { posts } = await getContentSnapshot();
+const title = "Wiedza budowlana i realizacje | Blog Novoterm";
+const description = "Praktyczna wiedza o wykończeniach obiektów biurowych i przemysłowych, izolacjach PUR i prowadzeniu inwestycji.";
+---
+
+<Layout {title} {description} solidHeader={true}>
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Okruszki"><a href="/">Novoterm</a> <span class="sep">/</span> <span>Blog</span></nav>
+        <h1 data-hero>Wiedza i doświadczenie</h1>
+        <p class="lead" data-hero>Konkretnie o wykonawstwie, technologiach i sprawnym prowadzeniu inwestycji.</p>
+        <span class="rule" data-hero></span>
+      </div>
+    </section>
+    <section class="section">
+      <div class="wrap blog-grid">
+        {
+          posts.length ? posts.map((post) => (
+            <article class="blog-card" data-reveal>
+              <div class="blog-meta">{post.tags.join(" · ")}</div>
+              <h2><a href={`/blog/${post.slug}`}>{post.title}</a></h2>
+              <p>{post.excerpt}</p>
+              <a class="link-more" href={`/blog/${post.slug}`}>Czytaj</a>
+            </article>
+          )) : <p class="lead">Pierwsze materiały pojawią się wkrótce.</p>
+        }
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .blog-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); }
+  .blog-card { min-height: 290px; padding: clamp(28px, 5vw, 58px); background: var(--bg); }
+  .blog-card h2 { margin: 18px 0; font-size: clamp(24px, 3vw, 36px); }
+  .blog-card p { color: var(--ink-soft); }
+  .blog-meta { color: var(--accent); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+  @media (max-width: 700px) { .blog-grid { grid-template-columns: 1fr; } }
+</style>

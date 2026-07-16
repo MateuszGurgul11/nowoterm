@@ -1,0 +1,73 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { categoryFilterKey, getContentSnapshot } from "../lib/cms";
+
+const { projects } = await getContentSnapshot();
+const title = "Realizacje — portfolio projektów B2B | Novoterm Budownictwo";
+const description = "Portfolio realizacji Novoterm Budownictwo: hale biurowe, obiekty przemysłowe, budynki usługowe, izolacje PUR. Filtruj według typu obiektu.";
+
+function formatArea(area: number | null | undefined): string | null {
+  if (area == null) return null;
+  return `${Number(area).toLocaleString("pl-PL")} m²`;
+}
+---
+
+<Layout {title} {description} solidHeader={true}>
+<main>
+    <section class="page-hero">
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Okruszki"><a href="/">Novoterm</a> <span class="sep">/</span> <span>Realizacje</span></nav>
+        <h1 data-hero>Realizacje</h1>
+        <p class="lead" data-hero>Wybrane projekty z ostatnich lat. Dane referencyjne udostępniamy na życzenie inwestora.</p>
+        <span class="rule" data-hero></span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="filters" data-reveal>
+            <button class="filter is-active" data-filter="all">Wszystkie</button>
+            <button class="filter" data-filter="hale">Hale biurowe</button>
+            <button class="filter" data-filter="przemyslowe">Obiekty przemysłowe</button>
+            <button class="filter" data-filter="uslugowe">Budynki usługowe</button>
+            <button class="filter" data-filter="izolacje">Izolacje PUR</button>
+          </div>
+        </div>
+        <div class="works">
+          {
+            projects.map((project) => (
+              <article class="work" data-reveal data-cat={categoryFilterKey(project.category)}>
+                <a href={`/realizacje/${project.slug}`} aria-label={`Zobacz realizację: ${project.title}`}>
+                  <div class="work-media">
+                    <svg viewBox="0 0 400 300" aria-hidden="true">
+                      <path d="M60 220 V110 H340 V220 Z" stroke="#9aa0a8" stroke-width="1.2" fill="none" />
+                      <path d="M60 165 H340" stroke="#bd8447" stroke-width="1.6" />
+                    </svg>
+                  </div>
+                  <div class="work-body">
+                    <span class="work-cat">{project.category}</span>
+                    <h3>{project.title}</h3>
+                    <div class="work-meta">
+                      {project.location && <span>{project.location}</span>}
+                      {formatArea(project.area_m2) && <span>{formatArea(project.area_m2)}</span>}
+                      {project.duration && <span>{project.duration}</span>}
+                    </div>
+                  </div>
+                </a>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <span class="label" data-reveal>Kontakt</span>
+        <h2 data-reveal>Chcesz referencje z projektu podobnego do Twojego?</h2>
+        <a class="btn btn--light" href="/kontakt" data-reveal>Zapytanie ofertowe</a>
+      </div>
+    </section>
+  </main>
+</Layout>

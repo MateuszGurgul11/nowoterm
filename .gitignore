@@ -1,2 +1,15 @@
 .claude/
 tools/
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.py[cod]
+node_modules/
+dist/
+.astro/
+.vercel/
+novoterm.db

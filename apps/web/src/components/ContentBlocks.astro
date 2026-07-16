@@ -1,0 +1,55 @@
+---
+import type { ContentBlock } from "../lib/cms";
+
+interface Props {
+  blocks?: ContentBlock[];
+}
+
+const { blocks = [] } = Astro.props;
+---
+
+<div class="cms-content">
+  {
+    blocks.map((block) => {
+      if (block.type === "heading" && block.level === 3) {
+        return <h3>{block.text}</h3>;
+      }
+      if (block.type === "heading") {
+        return <h2>{block.text}</h2>;
+      }
+      if (block.type === "paragraph") {
+        return <p>{block.text}</p>;
+      }
+      if (block.type === "list") {
+        return <ul>{block.items?.map((item) => <li>{item}</li>)}</ul>;
+      }
+      if (block.type === "quote") {
+        return <blockquote>{block.text}</blockquote>;
+      }
+      if (block.type === "image" && block.src) {
+        return <img src={block.src} alt={block.alt ?? ""} loading="lazy" />;
+      }
+      return null;
+    })
+  }
+</div>
+
+<style>
+  .cms-content {
+    width: min(780px, 100% - 2 * var(--pad));
+    margin-inline: auto;
+    padding-block: clamp(72px, 9vw, 132px);
+  }
+  .cms-content :global(h2) { margin-top: 2.4em; font-size: clamp(28px, 4vw, 46px); }
+  .cms-content :global(h3) { margin-top: 2em; font-size: clamp(22px, 3vw, 30px); }
+  .cms-content :global(p), .cms-content :global(li) { color: var(--ink-soft); }
+  .cms-content :global(p) { margin-top: 1.2em; }
+  .cms-content :global(ul) { margin-top: 1.2em; padding-left: 1.2em; list-style: disc; }
+  .cms-content :global(blockquote) {
+    margin: 2.4em 0;
+    padding-left: 1.4em;
+    border-left: 2px solid var(--accent);
+    font-size: clamp(20px, 3vw, 28px);
+  }
+  .cms-content :global(img) { width: 100%; height: auto; margin-top: 2.4em; }
+</style>

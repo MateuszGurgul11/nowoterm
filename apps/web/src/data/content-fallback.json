@@ -1,0 +1,577 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-16T15:38:12.344333Z",
+  "settings": {
+    "id": "default",
+    "company_name": "Novoterm Budownictwo",
+    "phone": "+48 726 324 514",
+    "email": "biuro@novoterm-budownictwo.pl",
+    "street": "ul. Ciemierów 10",
+    "postal_code": "62-310",
+    "city": "Pyzdry",
+    "region": "Wielkopolskie",
+    "social_links": {},
+    "default_seo_title": "Novoterm Budownictwo",
+    "default_seo_description": "Generalny wykonawca prac wykończeniowych obiektów biurowych i przemysłowych w Wielkopolsce.",
+    "default_og_image_id": null,
+    "organization_schema": {
+      "name": "Novoterm Budownictwo",
+      "@type": [
+        "Organization",
+        "LocalBusiness"
+      ],
+      "email": "biuro@novoterm-budownictwo.pl",
+      "address": {
+        "@type": "PostalAddress",
+        "postalCode": "62-310",
+        "addressRegion": "Wielkopolskie",
+        "streetAddress": "ul. Ciemierów 10",
+        "addressCountry": "PL",
+        "addressLocality": "Pyzdry"
+      },
+      "@context": "https://schema.org",
+      "telephone": "+48726324514"
+    },
+    "created_at": "2026-07-16T14:36:14.704623+00:00",
+    "updated_at": "2026-07-16T15:38:02.644204+00:00"
+  },
+  "media": [],
+  "pages": [
+    {
+      "id": "7bbb991f-8dba-4e3f-86eb-27f6cf0e8073",
+      "slug": "home",
+      "title": "Strona główna",
+      "seo_title": "Novoterm Budownictwo — generalny wykonawca",
+      "seo_description": "Generalny wykonawca wykończeń obiektów biurowych i przemysłowych. Hale biurowe, budynki usługowe, izolacje PUR. Wielkopolska.",
+      "og_image_id": null,
+      "content": {
+        "blocks": [
+          {
+            "text": "Generalny wykonawca prac wykończeniowych obiektów biurowych i przemysłowych w Wielkopolsce.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "5e884991-f8ad-4de2-b819-b8c8146d5858",
+      "slug": "o-firmie",
+      "title": "O firmie",
+      "seo_title": "O firmie — Novoterm Budownictwo",
+      "seo_description": "Novoterm Budownictwo — średniej wielkości generalny wykonawca wykończeń obiektów biurowych i przemysłowych. Własne zespoły, cała Wielkopolska.",
+      "og_image_id": null,
+      "content": {
+        "blocks": [
+          {
+            "text": "Novoterm Budownictwo — generalny wykonawca wykończeń obiektów biurowych i przemysłowych z własnymi zespołami i zapleczem technicznym.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "c4f8248a-0cab-4194-b3aa-e24703d38de0",
+      "slug": "generalne-wykonawstwo",
+      "title": "Generalne wykonawstwo",
+      "seo_title": "Generalne wykonawstwo 1000–2000 m² | Novoterm",
+      "seo_description": "Generalne wykonawstwo budynków usługowych 1000–2000 m² pod klucz. Jeden wykonawca, pełna odpowiedzialność za harmonogram i budżet.",
+      "og_image_id": null,
+      "content": {
+        "blocks": [
+          {
+            "text": "Generalne wykonawstwo budynków usługowych 1000–2000 m² pod klucz — jeden wykonawca, pełna odpowiedzialność.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "47b4699d-3874-4662-8f17-0a9287092352",
+      "slug": "specjalizacje-hale-biurowe",
+      "title": "Hale biurowe",
+      "seo_title": "Hale biurowe — wykończenia pod klucz | Novoterm",
+      "seo_description": "Wykończenia hali biurowych i powierzchni biurowych w obiektach przemysłowych. Zabudowy, sufity, posadzki, instalacje — pod klucz.",
+      "og_image_id": null,
+      "content": {
+        "blocks": [
+          {
+            "text": "Kompetencja flagowa Novoterm: wykończenia hal biurowych i powierzchni biurowych w obiektach przemysłowych.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "701d3d86-7de7-4185-974f-159068cdbe2e",
+      "slug": "specjalizacje-obiekty-przemyslowe",
+      "title": "Obiekty przemysłowe",
+      "seo_title": "Obiekty przemysłowe — wykończenia hal | Novoterm",
+      "seo_description": "Wykończenia obiektów przemysłowych: hale produkcyjne, magazyny, zaplecza socjalne. Izolacje PUR, zabudowy, posadzki.",
+      "og_image_id": null,
+      "content": {
+        "blocks": [
+          {
+            "text": "Wykończenia obiektów przemysłowych z możliwością pracy w reżimie działającego zakładu.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "711bc9f0-b209-4fa8-9968-0fc599525539",
+      "slug": "specjalizacje-izolacje-pur",
+      "title": "Izolacje natryskowe PUR",
+      "seo_title": "Izolacje natryskowe PUR | Novoterm",
+      "seo_description": "Natrysk piany poliuretanowej PUR: dachy i ściany hali, stropy, poddasza. Lambda od 0,022 W/mK. Wielkopolska.",
+      "og_image_id": null,
+      "content": {
+        "blocks": [
+          {
+            "text": "Natrysk piany poliuretanowej PUR — izolacja bezspoinowa, szybka aplikacja, wysoka energooszczędność.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "677c0db9-4ab7-428b-9323-81d64e6c019a",
+      "slug": "specjalizacje-sucha-zabudowa",
+      "title": "Sucha zabudowa",
+      "seo_title": "Sucha zabudowa — ścianki i sufity | Novoterm",
+      "seo_description": "Systemowa sucha zabudowa: ścianki działowe, sufity podwieszane g-k i kasetonowe, zabudowa poddaszy, szpachlowanie maszynowe.",
+      "og_image_id": null,
+      "content": {
+        "blocks": [
+          {
+            "text": "Systemowa sucha zabudowa wykonywana własnymi zespołami Novoterm.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "89460608-6b1a-4ad6-b811-944692ae6247",
+      "slug": "proces",
+      "title": "Dla inwestorów — proces",
+      "seo_title": "Proces współpracy z inwestorem | Novoterm",
+      "seo_description": "Jak pracujemy z inwestorami: wycena, harmonogram, nadzór budowy, raportowanie i odbiór z dokumentacją powykonawczą.",
+      "og_image_id": null,
+      "content": {
+        "blocks": [
+          {
+            "text": "Przewidywalny proces: wycena, harmonogram, nadzór, raportowanie i odbiór.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "8e737825-c2b3-4766-a7e3-9d88bf6108bf",
+      "slug": "kontakt",
+      "title": "Kontakt",
+      "seo_title": "Kontakt — zapytanie ofertowe | Novoterm",
+      "seo_description": "Skontaktuj się z Novoterm Budownictwo: +48 726 324 514, biuro@novoterm-budownictwo.pl. Formularz zapytania ofertowego.",
+      "og_image_id": null,
+      "content": {
+        "blocks": [
+          {
+            "text": "Zapytanie ofertowe: podaj rodzaj obiektu i metraż. Tel. +48 726 324 514.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "a5d97504-75a4-4df2-bc4a-50dbf888b794",
+      "slug": "realizacje",
+      "title": "Realizacje",
+      "seo_title": "Realizacje — portfolio B2B | Novoterm",
+      "seo_description": "Portfolio realizacji Novoterm Budownictwo: hale biurowe, obiekty przemysłowe, budynki usługowe, izolacje PUR.",
+      "og_image_id": null,
+      "content": {
+        "blocks": [
+          {
+            "text": "Wybrane projekty z ostatnich lat. Dane referencyjne udostępniamy na życzenie inwestora.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    }
+  ],
+  "projects": [
+    {
+      "id": "a9a22030-2cd6-40f5-87bf-95cd17cf4284",
+      "slug": "zaplecze-biurowe-hali-produkcyjnej-wrzesnia",
+      "title": "Zaplecze biurowe hali produkcyjnej — Września",
+      "excerpt": "860 m² powierzchni biurowo-socjalnej: od stanu surowego do przekazania najemcy w 11 tygodni.",
+      "category": "Hale biurowe",
+      "location": "Września",
+      "area_m2": 860.0,
+      "duration": "11 tygodni",
+      "completion_date": null,
+      "featured": true,
+      "cover_image_id": null,
+      "gallery": [],
+      "content": {
+        "blocks": [
+          {
+            "text": "Kompleksowe wykończenie zaplecza biurowego hali produkcyjnej we Wrześni — biura, sale konferencyjne i zaplecze socjalne pod klucz.",
+            "type": "paragraph"
+          },
+          {
+            "text": "Zakres prac",
+            "type": "heading",
+            "level": 2
+          },
+          {
+            "type": "list",
+            "items": [
+              "Zabudowy gipsowo-kartonowe i ścianki działowe",
+              "Sufity kasetonowe i podwieszane",
+              "Posadzki i wykończenia powierzchni",
+              "Elektryka i sanitariaty w zakresie pod klucz"
+            ]
+          },
+          {
+            "text": "Prace prowadzone równolegle z rozruchem części produkcyjnej. Odbiór bez uwag, w terminie.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "seo_title": "Zaplecze biurowe hali — Września | Novoterm",
+      "seo_description": "Realizacja Novoterm: 860 m² zaplecza biurowego hali produkcyjnej we Wrześni. Pod klucz w 11 tygodni.",
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "f7da75fe-6b2b-4a28-a863-e542fc36abf1",
+      "slug": "budynek-uslugowo-biurowy-poznan",
+      "title": "Budynek usługowo-biurowy — Poznań",
+      "excerpt": "Generalne wykonawstwo budynku usługowo-biurowego o powierzchni 1 450 m² w Poznaniu.",
+      "category": "Budynki usługowe",
+      "location": "Poznań",
+      "area_m2": 1450.0,
+      "duration": "generalne wykonawstwo",
+      "completion_date": null,
+      "featured": true,
+      "cover_image_id": null,
+      "gallery": [],
+      "content": {
+        "blocks": [
+          {
+            "text": "Generalne wykonawstwo budynku usługowo-biurowego w Poznaniu — jeden wykonawca odpowiedzialny za harmonogram, budżet i odbiór.",
+            "type": "paragraph"
+          },
+          {
+            "text": "Zakres",
+            "type": "heading",
+            "level": 2
+          },
+          {
+            "type": "list",
+            "items": [
+              "Koordynacja robót budowlanych i wykończeniowych",
+              "Nadzór podwykonawców i jakości",
+              "Dokumentacja powykonawcza i odbiór"
+            ]
+          }
+        ]
+      },
+      "seo_title": "Budynek usługowo-biurowy — Poznań | Novoterm",
+      "seo_description": "Realizacja Novoterm w Poznaniu: budynek usługowo-biurowy 1 450 m² w modelu generalnego wykonawstwa.",
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "16e952ec-202d-4137-816f-a3430ac74992",
+      "slug": "izolacja-pur-hali-magazynowej-gniezno",
+      "title": "Izolacja PUR hali magazynowej — Gniezno",
+      "excerpt": "Natrysk piany poliuretanowej na hali magazynowej o powierzchni 3 200 m² w Gnieźnie.",
+      "category": "Obiekty przemysłowe",
+      "location": "Gniezno",
+      "area_m2": 3200.0,
+      "duration": "natrysk PUR",
+      "completion_date": null,
+      "featured": true,
+      "cover_image_id": null,
+      "gallery": [],
+      "content": {
+        "blocks": [
+          {
+            "text": "Izolacja natryskowa PUR hali magazynowej w Gnieźnie — bezspoinowa warstwa o wysokiej skuteczności termicznej.",
+            "type": "paragraph"
+          },
+          {
+            "type": "list",
+            "items": [
+              "Przygotowanie podłoża i zabezpieczenie strefy prac",
+              "Natrysk piany zamkniętokomórkowej",
+              "Kontrola grubości i ciągłości izolacji"
+            ]
+          }
+        ]
+      },
+      "seo_title": "Izolacja PUR hali magazynowej — Gniezno",
+      "seo_description": "Realizacja Novoterm: izolacja natryskowa PUR hali magazynowej 3 200 m² w Gnieźnie.",
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "ed11d2fe-04e9-46b3-abf2-0f4b77f3c7c4",
+      "slug": "open-space-zaplecze-konferencyjne-poznan",
+      "title": "Open space z zapleczem konferencyjnym — Poznań",
+      "excerpt": "Sucha zabudowa open space z zapleczem konferencyjnym — 620 m² w Poznaniu.",
+      "category": "Hale biurowe",
+      "location": "Poznań",
+      "area_m2": 620.0,
+      "duration": "sucha zabudowa",
+      "completion_date": null,
+      "featured": false,
+      "cover_image_id": null,
+      "gallery": [],
+      "content": {
+        "blocks": [
+          {
+            "text": "Aranżacja powierzchni biurowej open space z częścią konferencyjną w Poznaniu w oparciu o systemową suchą zabudowę.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "seo_title": "Open space konferencyjny — Poznań | Novoterm",
+      "seo_description": "Realizacja Novoterm: open space z zapleczem konferencyjnym, 620 m², Poznań.",
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "822109c1-74f8-429f-95aa-c0c8d0d9af28",
+      "slug": "pawilon-uslugowy-czescia-biurowa-wrzesnia",
+      "title": "Pawilon usługowy z częścią biurową — Września",
+      "excerpt": "Wykończenie pawilonu usługowego z częścią biurową — 1 100 m² we Wrześni, pod klucz.",
+      "category": "Budynki usługowe",
+      "location": "Września",
+      "area_m2": 1100.0,
+      "duration": "pod klucz",
+      "completion_date": null,
+      "featured": false,
+      "cover_image_id": null,
+      "gallery": [],
+      "content": {
+        "blocks": [
+          {
+            "text": "Kompleksowe wykończenie pawilonu usługowego z częścią biurową we Wrześni w modelu pod klucz.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "seo_title": "Pawilon usługowy — Września | Novoterm",
+      "seo_description": "Realizacja Novoterm: pawilon usługowy z częścią biurową, 1 100 m², Września.",
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "e98fe901-7290-4d2b-a424-317efe61c5b7",
+      "slug": "modernizacja-zaplecza-socjalnego-konin",
+      "title": "Modernizacja zaplecza socjalnego — Konin",
+      "excerpt": "Modernizacja zaplecza socjalnego 480 m² w Koninie — prace w reżimie działającego zakładu.",
+      "category": "Obiekty przemysłowe",
+      "location": "Konin",
+      "area_m2": 480.0,
+      "duration": "praca w reżimie zakładu",
+      "completion_date": null,
+      "featured": false,
+      "cover_image_id": null,
+      "gallery": [],
+      "content": {
+        "blocks": [
+          {
+            "text": "Modernizacja zaplecza socjalnego obiektu przemysłowego w Koninie z zachowaniem ciągłości pracy zakładu.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "seo_title": "Modernizacja zaplecza — Konin | Novoterm",
+      "seo_description": "Realizacja Novoterm: modernizacja zaplecza socjalnego 480 m² w Koninie, w reżimie zakładu.",
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "6d56e6d9-f24f-4aa5-925e-c2bd56c9f440",
+      "slug": "termoizolacja-dachu-hali-produkcyjnej-sroda-wlkp",
+      "title": "Termoizolacja dachu hali produkcyjnej — Środa Wlkp.",
+      "excerpt": "Termoizolacja dachu hali produkcyjnej 2 700 m² w Środzie Wielkopolskiej (λ 0,022).",
+      "category": "Izolacje PUR",
+      "location": "Środa Wlkp.",
+      "area_m2": 2700.0,
+      "duration": "λ 0,022",
+      "completion_date": null,
+      "featured": false,
+      "cover_image_id": null,
+      "gallery": [],
+      "content": {
+        "blocks": [
+          {
+            "text": "Natryskowa termoizolacja dachu hali produkcyjnej w Środzie Wielkopolskiej — parametry λ od 0,022 W/mK.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "seo_title": "Termoizolacja dachu — Środa Wlkp. | Novoterm",
+      "seo_description": "Realizacja Novoterm: termoizolacja dachu hali produkcyjnej 2 700 m², Środa Wlkp.",
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "84eb7689-961f-49a8-bb78-f080a7658694",
+      "slug": "adaptacja-pietra-biurowego-hali-logistycznej-gniezno",
+      "title": "Adaptacja piętra biurowego hali logistycznej — Gniezno",
+      "excerpt": "Adaptacja piętra biurowego hali logistycznej — 740 m² w Gnieźnie, realizacja w 9 tygodni.",
+      "category": "Hale biurowe",
+      "location": "Gniezno",
+      "area_m2": 740.0,
+      "duration": "9 tygodni",
+      "completion_date": null,
+      "featured": false,
+      "cover_image_id": null,
+      "gallery": [],
+      "content": {
+        "blocks": [
+          {
+            "text": "Adaptacja piętra biurowego w hali logistycznej w Gnieźnie — szybka realizacja bez zakłócania logistyki obiektu.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "seo_title": "Adaptacja piętra biurowego — Gniezno | Novoterm",
+      "seo_description": "Realizacja Novoterm: adaptacja piętra biurowego hali logistycznej, 740 m², Gniezno.",
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "d3ebc644-8c70-449a-948a-135825147e59",
+      "slug": "ocieplenie-poddasza-obiektu-uslugowego-wrzesnia",
+      "title": "Ocieplenie poddasza obiektu usługowego — Września",
+      "excerpt": "Ocieplenie poddasza obiektu usługowego 390 m² we Wrześni pianą otwartokomórkową.",
+      "category": "Izolacje PUR",
+      "location": "Września",
+      "area_m2": 390.0,
+      "duration": "piana otwartokomórkowa",
+      "completion_date": null,
+      "featured": false,
+      "cover_image_id": null,
+      "gallery": [],
+      "content": {
+        "blocks": [
+          {
+            "text": "Ocieplenie poddasza obiektu usługowego we Wrześni pianą poliuretanową otwartokomórkową.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "seo_title": "Ocieplenie poddasza — Września | Novoterm",
+      "seo_description": "Realizacja Novoterm: ocieplenie poddasza obiektu usługowego 390 m², Września.",
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    }
+  ],
+  "posts": [],
+  "case_studies": [
+    {
+      "id": "4b851ddf-2c6c-4c72-9d7b-67d6d0f62b52",
+      "project_id": "a9a22030-2cd6-40f5-87bf-95cd17cf4284",
+      "slug": "zaplecze-biurowe-hali-produkcyjnej-wrzesnia",
+      "title": "Zaplecze biurowe hali produkcyjnej — Września",
+      "challenge": "860 m² powierzchni biurowo-socjalnej: od stanu surowego do przekazania najemcy w 11 tygodni.",
+      "solution": {
+        "blocks": [
+          {
+            "text": "Zakres obejmował zabudowy g-k, sufity kasetonowe, posadzki, elektrykę i sanitariaty — całość pod klucz.",
+            "type": "paragraph"
+          },
+          {
+            "text": "Prace prowadzono równolegle z rozruchem części produkcyjnej, bez kolizji z operacjami inwestora.",
+            "type": "paragraph"
+          }
+        ]
+      },
+      "results": [
+        {
+          "label": "Powierzchnia",
+          "value": "860 m²"
+        },
+        {
+          "label": "Czas realizacji",
+          "value": "11 tygodni"
+        },
+        {
+          "label": "Wynik",
+          "value": "Odbiór bez uwag, w terminie"
+        }
+      ],
+      "cover_image_id": null,
+      "seo_title": "Case study: hale biurowe Września | Novoterm",
+      "seo_description": "Case study Novoterm: zaplecze biurowe hali produkcyjnej we Wrześni — 860 m² w 11 tygodni.",
+      "status": "published",
+      "published_at": "2026-07-16T15:38:02.644204+00:00",
+      "created_at": "2026-07-16T15:38:02.644204+00:00",
+      "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    }
+  ]
+}

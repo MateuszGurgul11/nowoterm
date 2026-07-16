@@ -1,0 +1,41 @@
+---
+interface Props {
+  solid?: boolean;
+}
+
+const { solid = false } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isActive = (href: string) => path === href;
+const specializationsActive = path.startsWith("/specjalizacje-");
+---
+
+<header class:list={["header", { "header--solid": solid }]}>
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Novoterm Budownictwo — strona główna">
+      <span class="b-name">Novoterm</span>
+      <span class="b-sub">Budownictwo</span>
+    </a>
+    <nav class="nav" aria-label="Nawigacja główna">
+      <a href="/o-firmie" class:list={{ "is-active": isActive("/o-firmie") }}>Firma</a>
+      <a href="/generalne-wykonawstwo" class:list={{ "is-active": isActive("/generalne-wykonawstwo") }}>
+        Generalne wykonawstwo
+      </a>
+      <div class:list={["nav-drop", { "is-open": specializationsActive }]}>
+        <button type="button" aria-haspopup="true" aria-expanded={specializationsActive}>
+          Specjalizacje <span aria-hidden="true">▾</span>
+        </button>
+        <div class="nav-drop-menu">
+          <a href="/specjalizacje-hale-biurowe">Hale biurowe</a>
+          <a href="/specjalizacje-obiekty-przemyslowe">Obiekty przemysłowe</a>
+          <a href="/specjalizacje-izolacje-pur">Izolacje PUR</a>
+          <a href="/specjalizacje-sucha-zabudowa">Sucha zabudowa</a>
+        </div>
+      </div>
+      <a href="/realizacje" class:list={{ "is-active": isActive("/realizacje") }}>Realizacje</a>
+      <a href="/proces" class:list={{ "is-active": isActive("/proces") }}>Dla inwestorów</a>
+      <a href="/kontakt" class:list={{ "is-active": isActive("/kontakt") }}>Kontakt</a>
+    </nav>
+    <a class="header-tel" href="tel:+48726324514">+48 726 324 514</a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><i></i></button>
+  </div>
+</header>

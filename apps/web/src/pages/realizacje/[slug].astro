@@ -1,0 +1,53 @@
+---
+import ContentBlocks from "../../components/ContentBlocks.astro";
+import Layout from "../../layouts/Layout.astro";
+import { getContentSnapshot, type CmsProject } from "../../lib/cms";
+
+export async function getStaticPaths() {
+  const snapshot = await getContentSnapshot();
+  return snapshot.projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CmsProject;
+}
+
+const { project } = Astro.props;
+---
+
+<Layout title={project.seo_title} description={project.seo_description} solidHeader={true}>
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Okruszki">
+          <a href="/">Novoterm</a><span class="sep">/</span>
+          <a href="/realizacje">Realizacje</a><span class="sep">/</span>
+          <span>{project.title}</span>
+        </nav>
+        <span class="label" data-hero>{project.category}</span>
+        <h1 data-hero>{project.title}</h1>
+        <p class="lead" data-hero>{project.excerpt}</p>
+        <span class="rule" data-hero></span>
+      </div>
+    </section>
+    <section class="project-facts">
+      <div class="wrap">
+        {project.location && <div><span>Lokalizacja</span><strong>{project.location}</strong></div>}
+        {project.area_m2 && <div><span>Powierzchnia</span><strong>{project.area_m2} m²</strong></div>}
+        {project.duration && <div><span>Czas realizacji</span><strong>{project.duration}</strong></div>}
+      </div>
+    </section>
+    <ContentBlocks blocks={project.content.blocks} />
+  </main>
+</Layout>
+
+<style>
+  .project-facts { padding-block: 30px; border-bottom: 1px solid var(--line); background: var(--bg-soft); }
+  .project-facts .wrap { display: flex; gap: clamp(28px, 7vw, 90px); flex-wrap: wrap; }
+  .project-facts div { display: grid; gap: 4px; }
+  .project-facts span { color: var(--muted); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+  .project-facts strong { font-weight: 400; }
+</style>

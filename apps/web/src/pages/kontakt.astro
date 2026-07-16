@@ -1,0 +1,85 @@
+---
+import Layout from "../layouts/Layout.astro";
+const title = "Kontakt — zapytanie ofertowe | Novoterm Budownictwo";
+const description = "Skontaktuj się z Novoterm Budownictwo: +48 726 324 514, biuro@novoterm-budownictwo.pl. Formularz zapytania ofertowego — podaj rodzaj obiektu i metraż.";
+---
+
+<Layout {title} {description} solidHeader={true}>
+<main>
+    <section class="page-hero">
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Okruszki"><a href="/">Novoterm</a> <span class="sep">/</span> <span>Kontakt</span></nav>
+        <h1 data-hero>Porozmawiajmy o Twoim projekcie</h1>
+        <p class="lead" data-hero>Wypełnij formularz zapytania ofertowego lub zadzwoń. Na zapytania z dokumentacją odpowiadamy ofertą w 5 dni roboczych.</p>
+        <span class="rule" data-hero></span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap contact-grid">
+        <div class="contact-info">
+          <div class="contact-line" data-reveal>
+            <span class="cl-key">Telefon</span>
+            <a href="tel:+48726324514">+48 726 324 514</a>
+            <small>pn–pt 7:00–17:00</small>
+          </div>
+          <div class="contact-line" data-reveal>
+            <span class="cl-key">E-mail</span>
+            <a href="mailto:biuro@novoterm-budownictwo.pl" style="font-size:clamp(17px,1.8vw,22px)">biuro@novoterm-budownictwo.pl</a>
+          </div>
+          <div class="contact-line" data-reveal>
+            <span class="cl-key">Adres</span>
+            <span>ul. Ciemierów 10<br>62-310 Pyzdry</span>
+            <small>obszar działania: cała Wielkopolska</small>
+          </div>
+        </div>
+
+        <form class="form" data-reveal novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="f-name">Imię i nazwisko / firma <span class="req">*</span></label>
+              <input id="f-name" name="firma" type="text" required autocomplete="organization">
+            </div>
+            <div class="field">
+              <label for="f-mail">E-mail <span class="req">*</span></label>
+              <input id="f-mail" name="email" type="email" required autocomplete="email">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="f-obiekt">Rodzaj obiektu <span class="req">*</span></label>
+              <select id="f-obiekt" name="obiekt" required>
+                <option value="">— wybierz —</option>
+                <option>Hala biurowa / powierzchnia biurowa</option>
+                <option>Obiekt przemysłowy / magazyn</option>
+                <option>Budynek usługowy (GW pod klucz)</option>
+                <option>Izolacje PUR</option>
+                <option>Sucha zabudowa</option>
+                <option>Inny</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-metraz">Metraż (m²) <span class="req">*</span></label>
+              <input id="f-metraz" name="metraz" type="number" min="1" required placeholder="np. 1200">
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-msg">Opis projektu</label>
+            <textarea id="f-msg" name="opis" placeholder="Lokalizacja, zakres prac, oczekiwany termin…"></textarea>
+          </div>
+          <p class="form-note">Wysłanie formularza otworzy wiadomość e-mail w Twoim programie pocztowym z uzupełnioną treścią zapytania.</p>
+          <div class="form-success" role="status">Dziękujemy — jeśli wiadomość nie otworzyła się automatycznie, napisz bezpośrednio na biuro@novoterm-budownictwo.pl.</div>
+          <div><button class="btn btn--solid" type="submit">Wyślij zapytanie</button></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <span class="label" data-reveal>Kontakt</span>
+        <h2 data-reveal>Wolisz rozmowę? Zadzwoń: +48 726 324 514</h2>
+        <a class="btn btn--light" href="/kontakt" data-reveal>Zapytanie ofertowe</a>
+      </div>
+    </section>
+  </main>
+</Layout>
