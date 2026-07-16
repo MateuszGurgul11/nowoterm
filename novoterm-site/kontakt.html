@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pl" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt — zapytanie ofertowe | Novoterm Budownictwo</title>
+  <meta name="description" content="Skontaktuj się z Novoterm Budownictwo: +48 726 324 514, biuro@novoterm-budownictwo.pl. Formularz zapytania ofertowego — podaj rodzaj obiektu i metraż.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+</head>
+<body>
+
+  <header class="header header--solid">
+    <div class="wrap">
+      <a class="brand" href="index.html" aria-label="Novoterm Budownictwo — strona główna">
+        <span class="b-name">Novoterm</span>
+        <span class="b-sub">Budownictwo</span>
+      </a>
+      <nav class="nav" aria-label="Nawigacja główna">
+        <a href="o-firmie.html">Firma</a>
+        <a href="generalne-wykonawstwo.html">Generalne wykonawstwo</a>
+        <div class="nav-drop">
+          <button type="button" aria-haspopup="true">Specjalizacje <span aria-hidden="true">▾</span></button>
+          <div class="nav-drop-menu">
+            <a href="specjalizacje-hale-biurowe.html">Hale biurowe</a>
+            <a href="specjalizacje-obiekty-przemyslowe.html">Obiekty przemysłowe</a>
+            <a href="specjalizacje-izolacje-pur.html">Izolacje PUR</a>
+            <a href="specjalizacje-sucha-zabudowa.html">Sucha zabudowa</a>
+          </div>
+        </div>
+        <a href="realizacje.html">Realizacje</a>
+        <a href="proces.html">Dla inwestorów</a>
+        <a href="kontakt.html" class="is-active">Kontakt</a>
+      </nav>
+      <a class="header-tel" href="tel:+48726324514">+48 726 324 514</a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false"><i></i></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Okruszki"><a href="index.html">Novoterm</a> <span class="sep">/</span> <span>Kontakt</span></nav>
+        <h1 data-hero>Porozmawiajmy o Twoim projekcie</h1>
+        <p class="lead" data-hero>Wypełnij formularz zapytania ofertowego lub zadzwoń. Na zapytania z dokumentacją odpowiadamy ofertą w 5 dni roboczych.</p>
+        <span class="rule" data-hero></span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap contact-grid">
+        <div class="contact-info">
+          <div class="contact-line" data-reveal>
+            <span class="cl-key">Telefon</span>
+            <a href="tel:+48726324514">+48 726 324 514</a>
+            <small>pn–pt 7:00–17:00</small>
+          </div>
+          <div class="contact-line" data-reveal>
+            <span class="cl-key">E-mail</span>
+            <a href="mailto:biuro@novoterm-budownictwo.pl" style="font-size:clamp(17px,1.8vw,22px)">biuro@novoterm-budownictwo.pl</a>
+          </div>
+          <div class="contact-line" data-reveal>
+            <span class="cl-key">Adres</span>
+            <span>ul. Ciemierów 10<br>62-310 Pyzdry</span>
+            <small>obszar działania: cała Wielkopolska</small>
+          </div>
+        </div>
+
+        <form class="form" data-reveal novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="f-name">Imię i nazwisko / firma <span class="req">*</span></label>
+              <input id="f-name" name="firma" type="text" required autocomplete="organization">
+            </div>
+            <div class="field">
+              <label for="f-mail">E-mail <span class="req">*</span></label>
+              <input id="f-mail" name="email" type="email" required autocomplete="email">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="f-obiekt">Rodzaj obiektu <span class="req">*</span></label>
+              <select id="f-obiekt" name="obiekt" required>
+                <option value="">— wybierz —</option>
+                <option>Hala biurowa / powierzchnia biurowa</option>
+                <option>Obiekt przemysłowy / magazyn</option>
+                <option>Budynek usługowy (GW pod klucz)</option>
+                <option>Izolacje PUR</option>
+                <option>Sucha zabudowa</option>
+                <option>Inny</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-metraz">Metraż (m²) <span class="req">*</span></label>
+              <input id="f-metraz" name="metraz" type="number" min="1" required placeholder="np. 1200">
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-msg">Opis projektu</label>
+            <textarea id="f-msg" name="opis" placeholder="Lokalizacja, zakres prac, oczekiwany termin…"></textarea>
+          </div>
+          <p class="form-note">Wysłanie formularza otworzy wiadomość e-mail w Twoim programie pocztowym z uzupełnioną treścią zapytania.</p>
+          <div class="form-success" role="status">Dziękujemy — jeśli wiadomość nie otworzyła się automatycznie, napisz bezpośrednio na biuro@novoterm-budownictwo.pl.</div>
+          <div><button class="btn btn--solid" type="submit">Wyślij zapytanie</button></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="wrap">
+        <span class="label" data-reveal>Kontakt</span>
+        <h2 data-reveal>Wolisz rozmowę? Zadzwoń: +48 726 324 514</h2>
+        <a class="btn btn--light" href="kontakt.html" data-reveal>Zapytanie ofertowe</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-main">
+      <div class="footer-brand">
+        <span class="b-name">Novoterm</span>
+        <span class="b-sub">Budownictwo</span>
+        <p>Generalny wykonawca prac wykończeniowych obiektów biurowych i przemysłowych. Wielkopolska.</p>
+      </div>
+      <div>
+        <h4>Oferta</h4>
+        <ul>
+          <li><a href="generalne-wykonawstwo.html">Generalne wykonawstwo</a></li>
+          <li><a href="specjalizacje-hale-biurowe.html">Hale biurowe</a></li>
+          <li><a href="specjalizacje-obiekty-przemyslowe.html">Obiekty przemysłowe</a></li>
+          <li><a href="specjalizacje-izolacje-pur.html">Izolacje PUR</a></li>
+          <li><a href="specjalizacje-sucha-zabudowa.html">Sucha zabudowa</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Firma</h4>
+        <ul>
+          <li><a href="o-firmie.html">O firmie</a></li>
+          <li><a href="realizacje.html">Realizacje</a></li>
+          <li><a href="proces.html">Dla inwestorów</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul class="footer-contact">
+          <li><b><a href="tel:+48726324514">+48 726 324 514</a></b></li>
+          <li><a href="mailto:biuro@novoterm-budownictwo.pl">biuro@novoterm-budownictwo.pl</a></li>
+          <li>ul. Ciemierów 10<br>62-310 Pyzdry</li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>© 2026 Novoterm Budownictwo. Wszystkie prawa zastrzeżone.</span>
+      <span>Pozostała działalność: budownictwo mieszkaniowe · ogrodzenia · konstrukcje stalowe</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
