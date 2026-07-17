@@ -257,7 +257,7 @@ body.nav-open .nav-toggle::after { top: 21px; transform: rotate(-45deg); }
 .hero-note {
   position: absolute; top: calc(var(--header-h) + 26px); right: var(--pad);
   max-width: 300px; text-align: right;
-  font-size: 13px; font-weight: 300; line-height: 1.7;
+  font-size: 18px; font-weight: 300; line-height: 1.7;
   color: var(--dark-muted);
 }
 .hero-note b { color: var(--dark-text); font-weight: 400; }
