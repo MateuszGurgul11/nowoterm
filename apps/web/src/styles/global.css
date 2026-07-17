@@ -271,6 +271,19 @@ body.nav-open .nav-toggle::after { top: 21px; transform: rotate(-45deg); }
 }
 .hero-mark::after { background: linear-gradient(270deg, transparent, rgba(242, 241, 238, 0.5)); }
 
+.hero-logo {
+  margin: 0;
+  line-height: 0;
+  flex: 0 1 auto;
+}
+.hero-logo img {
+  display: block;
+  width: clamp(200px, 36vw, 420px);
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
 .hero-sub {
   font-size: clamp(12px, 1.3vw, 15px);
   font-weight: 300;
@@ -281,7 +294,7 @@ body.nav-open .nav-toggle::after { top: 21px; transform: rotate(-45deg); }
 }
 
 .hero-tag {
-  margin-top: 30px;
+  margin-top: 8px;
   font-size: clamp(15px, 1.6vw, 19px);
   font-weight: 300;
   letter-spacing: 0.06em;
