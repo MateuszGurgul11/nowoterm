@@ -1,4 +1,4 @@
-/* NOVOTERM BUDOWNICTWO — interakcje (minimalistyczne, GSAP + ScrollTrigger) */
+/* NOVOTERM BUDOWNICTWO - interakcje (minimalistyczne, GSAP + ScrollTrigger) */
 (function () {
   "use strict";
 
@@ -53,7 +53,7 @@
       e.preventDefault();
       var success = form.querySelector(".form-success");
       var data = new FormData(form);
-      var subject = encodeURIComponent("Zapytanie ofertowe — " + (data.get("obiekt") || "obiekt") + ", " + (data.get("metraz") || "?") + " m2");
+      var subject = encodeURIComponent("Zapytanie ofertowe - " + (data.get("obiekt") || "obiekt") + ", " + (data.get("metraz") || "?") + " m2");
       var bodyLines = [];
       data.forEach(function (v, k) { if (v) bodyLines.push(k + ": " + v); });
       var mailto = "mailto:biuro@novoterm-budownictwo.pl?subject=" + subject + "&body=" + encodeURIComponent(bodyLines.join("\n"));
@@ -66,7 +66,7 @@
   var heroVideo = document.querySelector(".hero-video");
   if (heroVideo && !reducedMotion) {
     var reversing = false;
-    var reverseStep = 1 / 24; /* ~1 klatka przy 24 fps — płynne cofanie */
+    var reverseStep = 1 / 24; /* ~1 klatka przy 24 fps - płynne cofanie */
 
     function playForward() {
       reversing = false;
@@ -99,7 +99,7 @@
       if (reversing) return;
       reversing = true;
       heroVideo.pause();
-      /* od razu pierwszy krok wstecz — bez czekania na ended / buforowanie pustki */
+      /* od razu pierwszy krok wstecz - bez czekania na ended / buforowanie pustki */
       var startAt = Math.max(0, (heroVideo.duration || heroVideo.currentTime) - reverseStep);
       heroVideo.addEventListener("seeked", onSeekedReverse);
       try {
@@ -114,7 +114,7 @@
       if (reversing) return;
       var duration = heroVideo.duration;
       if (!duration || !isFinite(duration)) return;
-      /* zawróć tuż przed końcem — unikamy pauzy na zdarzeniu ended */
+      /* zawróć tuż przed końcem - unikamy pauzy na zdarzeniu ended */
       if (heroVideo.currentTime >= duration - 0.12) startReverse();
     }
 
@@ -153,7 +153,7 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
-  /* hero — spokojna sekwencja wejścia */
+  /* hero - spokojna sekwencja wejścia */
   var heroItems = gsap.utils.toArray("[data-hero]");
   if (heroItems.length) {
     gsap.set(heroItems, { opacity: 0, y: 26 });
@@ -166,7 +166,7 @@
     });
   }
 
-  /* reveal — delikatny fade-up (ScrollTrigger.batch) */
+  /* reveal - delikatny fade-up (ScrollTrigger.batch) */
   var revealEls = gsap.utils.toArray("[data-reveal]");
   if (revealEls.length) {
     ScrollTrigger.batch(revealEls, {

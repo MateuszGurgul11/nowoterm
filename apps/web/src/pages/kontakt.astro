@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
-const title = "Kontakt — zapytanie ofertowe | Novoterm Budownictwo";
-const description = "Skontaktuj się z Novoterm Budownictwo: +48 726 324 514, biuro@novoterm-budownictwo.pl. Formularz zapytania ofertowego — podaj rodzaj obiektu i metraż.";
+const title = "Kontakt - zapytanie ofertowe | Novoterm Budownictwo";
+const description = "Skontaktuj się z Novoterm Budownictwo: +48 726 324 514, biuro@novoterm-budownictwo.pl. Formularz zapytania ofertowego - podaj rodzaj obiektu i metraż.";
 ---
 
 <Layout {title} {description} solidHeader={true}>
@@ -25,7 +25,7 @@ const description = "Skontaktuj się z Novoterm Budownictwo: +48 726 324 514, bi
           </div>
           <div class="contact-line" data-reveal>
             <span class="cl-key">E-mail</span>
-            <a href="mailto:biuro@novoterm-budownictwo.pl" style="font-size:clamp(17px,1.8vw,22px)">biuro@novoterm-budownictwo.pl</a>
+            <a href="mailto:biuro@novoterm-budownictwo.pl" style="font-size: clamp(18px, 1.8vw, 22px)">biuro@novoterm-budownictwo.pl</a>
           </div>
           <div class="contact-line" data-reveal>
             <span class="cl-key">Adres</span>
@@ -49,7 +49,7 @@ const description = "Skontaktuj się z Novoterm Budownictwo: +48 726 324 514, bi
             <div class="field">
               <label for="f-obiekt">Rodzaj obiektu <span class="req">*</span></label>
               <select id="f-obiekt" name="obiekt" required>
-                <option value="">— wybierz —</option>
+                <option value="">- wybierz -</option>
                 <option>Hala biurowa / powierzchnia biurowa</option>
                 <option>Obiekt przemysłowy / magazyn</option>
                 <option>Budynek usługowy (GW pod klucz)</option>
@@ -68,7 +68,7 @@ const description = "Skontaktuj się z Novoterm Budownictwo: +48 726 324 514, bi
             <textarea id="f-msg" name="opis" placeholder="Lokalizacja, zakres prac, oczekiwany termin…"></textarea>
           </div>
           <p class="form-note">Wysłanie formularza otworzy wiadomość e-mail w Twoim programie pocztowym z uzupełnioną treścią zapytania.</p>
-          <div class="form-success" role="status">Dziękujemy — jeśli wiadomość nie otworzyła się automatycznie, napisz bezpośrednio na biuro@novoterm-budownictwo.pl.</div>
+          <div class="form-success" role="status">Dziękujemy - jeśli wiadomość nie otworzyła się automatycznie, napisz bezpośrednio na biuro@novoterm-budownictwo.pl.</div>
           <div><button class="btn btn--solid" type="submit">Wyślij zapytanie</button></div>
         </form>
       </div>
