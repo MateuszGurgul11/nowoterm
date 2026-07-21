@@ -29,7 +29,23 @@ Zmienne builda opisuje `apps/web/.env.example`.
 
 ## CMS
 
-Wymagany Python 3.12 lub nowszy:
+Wymagany Python 3.12 lub nowszy.
+
+### Windows (PowerShell)
+
+```powershell
+cd apps/cms
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+# uvloop nie działa na Windows — użyj pliku bez tej zależności:
+Get-Content requirements.lock | Where-Object { $_ -notmatch 'uvloop' } | Set-Content requirements.win.lock
+pip install -r requirements.win.lock
+copy .env.example .env
+# uzupełnij .env (Supabase), potem:
+uvicorn app.main:app --reload --port 8000
+```
+
+### Linux / macOS
 
 ```bash
 cd apps/cms

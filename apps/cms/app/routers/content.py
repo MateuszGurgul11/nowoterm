@@ -20,7 +20,12 @@ router = APIRouter(
 Session = Annotated[AsyncSession, Depends(get_session)]
 
 
-def apply_payload[ModelT: (Page, Project)](
+from typing import TypeVar
+
+ModelT = TypeVar("ModelT", Page, Project)
+
+
+def apply_payload(
     model: ModelT, payload: PagePayload | ProjectPayload
 ) -> ModelT:
     values = payload.model_dump()
