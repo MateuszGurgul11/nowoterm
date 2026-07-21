@@ -27,6 +27,7 @@ export type CmsProject = CmsEntry & {
   duration: string | null;
   completion_date: string | null;
   featured?: boolean;
+  sort_order?: number;
   cover_image?: string | null;
   gallery: Array<{ src: string; alt: string }>;
 };
@@ -40,6 +41,17 @@ export function categoryFilterKey(category: string): string {
     "Izolacje PUR": "izolacje",
   };
   return map[category] ?? category.toLowerCase().replace(/\s+/g, "-");
+}
+
+export function sortProjects(projects: CmsProject[]): CmsProject[] {
+  return [...projects].sort((a, b) => {
+    const orderA = a.sort_order ?? Number.MAX_SAFE_INTEGER;
+    const orderB = b.sort_order ?? Number.MAX_SAFE_INTEGER;
+    if (orderA !== orderB) return orderA - orderB;
+    const dateA = a.published_at ? Date.parse(a.published_at) : 0;
+    const dateB = b.published_at ? Date.parse(b.published_at) : 0;
+    return dateB - dateA;
+  });
 }
 
 export type CmsPost = CmsEntry & {
@@ -70,8 +82,13 @@ let snapshotPromise: Promise<ContentSnapshot> | undefined;
 async function fetchSnapshot(): Promise<ContentSnapshot> {
   const url = import.meta.env.CMS_EXPORT_URL;
   const token = import.meta.env.CMS_EXPORT_TOKEN;
+  const normalize = (snapshot: ContentSnapshot): ContentSnapshot => ({
+    ...snapshot,
+    projects: sortProjects(snapshot.projects ?? []),
+  });
+
   if (!url || !token) {
-    return fallbackSnapshot as ContentSnapshot;
+    return normalize(fallbackSnapshot as ContentSnapshot);
   }
 
   try {
@@ -82,10 +99,10 @@ async function fetchSnapshot(): Promise<ContentSnapshot> {
     if (!response.ok) {
       throw new Error(`CMS zwrócił ${response.status}`);
     }
-    return (await response.json()) as ContentSnapshot;
+    return normalize((await response.json()) as ContentSnapshot);
   } catch (error) {
     console.warn("CMS jest niedostępny podczas builda; używam lokalnego snapshotu.", error);
-    return fallbackSnapshot as ContentSnapshot;
+    return normalize(fallbackSnapshot as ContentSnapshot);
   }
 }
 

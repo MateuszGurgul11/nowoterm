@@ -124,6 +124,7 @@ class Project(PublishableMixin, Base):
     duration: Mapped[str | None] = mapped_column(Text)
     completion_date: Mapped[date | None] = mapped_column(Date)
     featured: Mapped[bool] = mapped_column(Boolean, default=False)
+    sort_order: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
     cover_image_id: Mapped[uuid.UUID | None] = mapped_column(
         UUID(as_uuid=True), ForeignKey("public.media.id", ondelete="SET NULL")
     )

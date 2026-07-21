@@ -48,6 +48,13 @@ Logowanie do panelu odbywa się przez **Supabase Authentication**. Utwórz użyt
 Dashboard → Authentication → Users (Auto Confirm User) i zaloguj się tym emailem oraz hasłem
 na `http://127.0.0.1:8000/admin/login`.
 
+Panel pozwala graficznie edytować strony i realizacje (bloki treści, okładka, galeria),
+przesyłać media oraz zmieniać kolejność realizacji metodą przeciągnij-i-upuść.
+
+Po wdrożeniu kolumny kolejności uruchom migrację w Supabase SQL Editor:
+
+`supabase/migrations/20260721_add_project_sort_order.sql`
+
 ## Publikacja treści
 
 1. Redaktor zapisuje i publikuje treść w CMS.

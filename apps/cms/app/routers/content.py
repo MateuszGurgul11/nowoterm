@@ -81,7 +81,13 @@ async def delete_page(page_id: UUID, session: Session) -> Response:
 
 @router.get("/projects", response_model=list[ProjectResponse])
 async def list_projects(session: Session) -> list[Project]:
-    return list((await session.scalars(select(Project).order_by(Project.updated_at.desc()))).all())
+    return list(
+        (
+            await session.scalars(
+                select(Project).order_by(Project.sort_order.asc(), Project.updated_at.desc())
+            )
+        ).all()
+    )
 
 
 @router.post("/projects", response_model=ProjectResponse, status_code=status.HTTP_201_CREATED)

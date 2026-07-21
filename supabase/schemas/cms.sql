@@ -61,6 +61,7 @@ create table public.projects (
   duration text,
   completion_date date,
   featured boolean not null default false,
+  sort_order integer not null default 0,
   cover_image_id uuid references public.media(id) on delete set null,
   gallery jsonb not null default '[]'::jsonb check (jsonb_typeof(gallery) = 'array'),
   content jsonb not null default '{}'::jsonb check (jsonb_typeof(content) = 'object'),
@@ -115,6 +116,8 @@ create index pages_published_idx
 create index projects_published_idx
   on public.projects (published_at desc)
   where status = 'published';
+create index projects_sort_order_idx
+  on public.projects (sort_order asc, published_at desc);
 create index projects_category_published_idx
   on public.projects (category, published_at desc)
   where status = 'published';

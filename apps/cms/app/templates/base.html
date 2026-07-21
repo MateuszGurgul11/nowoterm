@@ -6,16 +6,22 @@
     <meta name="robots" content="noindex,nofollow">
     <title>{% block title %}Novoterm CMS{% endblock %}</title>
     <link rel="stylesheet" href="/static/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js" defer></script>
+    <script src="/static/admin.js" defer></script>
   </head>
   <body>
     <header class="topbar">
       <a class="brand" href="/admin">Novoterm <span>CMS</span></a>
-      {% if csrf_token %}
-      <form method="post" action="/admin/logout">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-        <button class="link-button" type="submit">Wyloguj</button>
-      </form>
-      {% endif %}
+      <nav class="topnav">
+        {% if csrf_token %}
+        <a href="/admin">Panel</a>
+        <a href="/admin/media">Media</a>
+        <form method="post" action="/admin/logout">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+          <button class="link-button" type="submit">Wyloguj</button>
+        </form>
+        {% endif %}
+      </nav>
     </header>
     <main class="shell">
       {% block content %}{% endblock %}

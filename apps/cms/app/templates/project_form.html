@@ -6,6 +6,7 @@
   <a class="back-link" href="/admin">Wróć do panelu</a>
 </div>
 {% if error %}<div class="alert"><strong>Popraw dane:</strong> {{ error }}</div>{% endif %}
+<script type="application/json" id="media-data">{{ media_items | tojson }}</script>
 <form class="editor" method="post" action="/admin/projects/save">
   <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
   {% if project %}<input type="hidden" name="project_id" value="{{ project.id }}">{% endif %}
@@ -18,12 +19,64 @@
         <label>Kategoria<input name="category" required value="{{ project.category if project else '' }}"></label>
         <label>Lokalizacja<input name="location" value="{{ project.location if project and project.location else '' }}"></label>
       </div>
+      <div class="two-fields">
+        <label>Metraż (m²)<input name="area_m2" type="number" min="0" step="0.01" value="{{ project.area_m2 if project and project.area_m2 is not none else '' }}"></label>
+        <label>Czas realizacji<input name="duration" value="{{ project.duration if project and project.duration else '' }}" placeholder="np. 11 tygodni"></label>
+      </div>
+      <label>Data zakończenia<input name="completion_date" type="date" value="{{ project.completion_date.isoformat() if project and project.completion_date else '' }}"></label>
       <label>Krótki opis<textarea name="excerpt" rows="4">{{ project.excerpt if project else '' }}</textarea></label>
-      <label>Treść (JSON)<textarea name="content_json" rows="13" required>{{ content_json }}</textarea></label>
-      <label>Galeria (JSON)<textarea name="gallery_json" rows="8" required>{{ gallery_json }}</textarea></label>
+
+      <div class="cover-editor" data-cover-editor>
+        <h3>Okładka</h3>
+        <input type="hidden" name="cover_image_id" value="{{ project.cover_image_id if project and project.cover_image_id else '' }}">
+        <div class="cover-preview" data-cover-preview>
+          {% if project and project.cover_image_id %}
+            {% set cover = media_items | selectattr('id', 'equalto', project.cover_image_id|string) | list %}
+            {% if cover %}
+            <img src="{{ cover[0].url }}" alt="Okładka">
+            {% else %}
+            <span>Wybrano ID okładki (podgląd niedostępny)</span>
+            {% endif %}
+          {% else %}
+          <span>Brak okładki</span>
+          {% endif %}
+        </div>
+        <div class="inline-actions">
+          <button type="button" class="button button--small" data-cover-pick>Wybierz okładkę</button>
+          <button type="button" class="button button--small" data-cover-clear>Usuń</button>
+        </div>
+      </div>
+
+      <div class="gallery-editor" data-gallery-editor>
+        <div class="block-toolbar">
+          <h3>Galeria</h3>
+          <button type="button" class="button button--small" data-add-gallery>Dodaj zdjęcie</button>
+        </div>
+        <div data-gallery class="gallery-list"></div>
+        <textarea name="gallery_json" hidden>{{ gallery_json }}</textarea>
+      </div>
+
+      <div class="block-editor" data-block-editor>
+        <div class="block-toolbar">
+          <h3>Treść</h3>
+          <div>
+            <button type="button" class="button button--small" data-add-block="heading">Nagłówek</button>
+            <button type="button" class="button button--small" data-add-block="paragraph">Akapit</button>
+            <button type="button" class="button button--small" data-add-block="list">Lista</button>
+            <button type="button" class="button button--small" data-add-block="quote">Cytat</button>
+            <button type="button" class="button button--small" data-add-block="image">Obraz</button>
+          </div>
+        </div>
+        <div data-blocks class="block-list"></div>
+        <textarea name="content_json" hidden>{{ content_json }}</textarea>
+      </div>
     </section>
     <aside class="panel form-stack">
       <h2>Publikacja i SEO</h2>
+      <label class="checkbox-label">
+        <input type="checkbox" name="featured" {% if project and project.featured %}checked{% endif %}>
+        Wyróżniona na stronie głównej
+      </label>
       <label>Status
         <select name="content_status">
           {% for value in ["draft", "published", "archived"] %}

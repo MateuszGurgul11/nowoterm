@@ -6,6 +6,7 @@
   <a class="back-link" href="/admin">Wróć do panelu</a>
 </div>
 {% if error %}<div class="alert"><strong>Popraw dane:</strong> {{ error }}</div>{% endif %}
+<script type="application/json" id="media-data">{{ media_items | tojson }}</script>
 <form class="editor" method="post" action="/admin/pages/save">
   <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
   {% if page %}<input type="hidden" name="page_id" value="{{ page.id }}">{% endif %}
@@ -14,7 +15,21 @@
       <h2>Treść</h2>
       <label>Tytuł<input name="title" required value="{{ page.title if page else '' }}"></label>
       <label>Slug<input name="slug" required pattern="[a-z0-9]+(?:-[a-z0-9]+)*" value="{{ page.slug if page else '' }}" placeholder="np. o-firmie"></label>
-      <label>Struktura sekcji (JSON)<textarea name="content_json" rows="18" required>{{ content_json }}</textarea></label>
+
+      <div class="block-editor" data-block-editor>
+        <div class="block-toolbar">
+          <span>Bloki treści</span>
+          <div>
+            <button type="button" class="button button--small" data-add-block="heading">Nagłówek</button>
+            <button type="button" class="button button--small" data-add-block="paragraph">Akapit</button>
+            <button type="button" class="button button--small" data-add-block="list">Lista</button>
+            <button type="button" class="button button--small" data-add-block="quote">Cytat</button>
+            <button type="button" class="button button--small" data-add-block="image">Obraz</button>
+          </div>
+        </div>
+        <div data-blocks class="block-list"></div>
+        <textarea name="content_json" hidden>{{ content_json }}</textarea>
+      </div>
     </section>
     <aside class="panel form-stack">
       <h2>Publikacja i SEO</h2>

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Media — Novoterm CMS{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><p class="eyebrow">Biblioteka</p><h1>Media</h1></div>
+  <a class="back-link" href="/admin">Wróć do panelu</a>
+</div>
+
+<script type="application/json" id="media-data">{{ media_items | tojson }}</script>
+
+<section class="panel">
+  <h2>Prześlij plik</h2>
+  <form class="media-upload form-stack" data-media-upload>
+    <label>Plik obrazu<input type="file" name="file" accept="image/jpeg,image/png,image/webp,image/avif,image/svg+xml" required></label>
+    <label>Tekst alternatywny (alt)<input type="text" name="alt_text" maxlength="240" required placeholder="Opis zdjęcia"></label>
+    <button class="button button--accent" type="submit">Prześlij</button>
+  </form>
+</section>
+
+<section class="panel">
+  <div class="panel-head"><h2>Pliki</h2></div>
+  <div class="media-grid" data-media-grid>
+    {% for item in media_items %}
+    <article class="media-card">
+      <img src="{{ item.url }}" alt="{{ item.alt_text }}">
+      <div>
+        <strong>{{ item.file_name }}</strong>
+        <small>{{ item.url }}</small>
+        <button type="button" class="button button--small" data-copy="{{ item.url }}">Kopiuj URL</button>
+      </div>
+    </article>
+    {% else %}
+    <p class="empty">Brak przesłanych plików.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

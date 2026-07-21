@@ -39,6 +39,7 @@ class ProjectPayload(BaseModel):
     duration: str | None = Field(default=None, max_length=80)
     completion_date: date | None = None
     featured: bool = False
+    sort_order: int = 0
     cover_image_id: UUID | None = None
     gallery: list[dict[str, Any]] = Field(default_factory=list)
     content: dict[str, Any] = Field(default_factory=dict)

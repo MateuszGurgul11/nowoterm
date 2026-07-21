@@ -38,6 +38,42 @@ def test_page_schema_rejects_invalid_slug() -> None:
         )
 
 
+def test_project_schema_accepts_sort_order_and_featured() -> None:
+    from app.schemas import ProjectPayload
+
+    payload = ProjectPayload(
+        slug="hala-biurowa-wrzesnia",
+        title="Hala biurowa",
+        category="Hale biurowe",
+        seo_title="Hala biurowa SEO title",
+        seo_description="Opis SEO realizacji dla wyników wyszukiwania.",
+        featured=True,
+        sort_order=4,
+    )
+    assert payload.featured is True
+    assert payload.sort_order == 4
+
+
+def test_export_enrich_cover_maps_media_url() -> None:
+    from uuid import uuid4
+
+    from app.models import Media
+    from app.routers.export import enrich_cover
+
+    media_id = uuid4()
+    media = Media(
+        id=media_id,
+        storage_path="uploads/a.jpg",
+        public_url="https://cdn.example/a.jpg",
+        file_name="a.jpg",
+        mime_type="image/jpeg",
+    )
+    enriched = enrich_cover({"cover_image_id": str(media_id), "title": "x"}, {media_id: media})
+    assert enriched["cover_image"] == "https://cdn.example/a.jpg"
+    empty = enrich_cover({"cover_image_id": None}, {})
+    assert empty["cover_image"] is None
+
+
 @pytest.mark.asyncio
 async def test_login_rejects_invalid_credentials() -> None:
     transport = httpx.ASGITransport(app=app)
