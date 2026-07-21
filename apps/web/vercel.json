@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/admin", "destination": "https://novoterm-cms.onrender.com/admin" },
+    { "source": "/admin/:path*", "destination": "https://novoterm-cms.onrender.com/admin/:path*" },
+    { "source": "/api/admin/:path*", "destination": "https://novoterm-cms.onrender.com/api/admin/:path*" },
+    { "source": "/static/:path*", "destination": "https://novoterm-cms.onrender.com/static/:path*" }
+  ]
+}

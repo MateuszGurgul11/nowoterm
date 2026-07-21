@@ -21,12 +21,13 @@
   <div class="panel-head"><h2>Pliki</h2></div>
   <div class="media-grid" data-media-grid>
     {% for item in media_items %}
-    <article class="media-card">
+    <article class="media-card" data-media-id="{{ item.id }}">
       <img src="{{ item.url }}" alt="{{ item.alt_text }}">
       <div>
         <strong>{{ item.file_name }}</strong>
         <small>{{ item.url }}</small>
         <button type="button" class="button button--small" data-copy="{{ item.url }}">Kopiuj URL</button>
+        <button type="button" class="button button--small button--danger" data-delete-media="{{ item.id }}">Usuń</button>
       </div>
     </article>
     {% else %}

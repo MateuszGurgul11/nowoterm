@@ -1,9 +1,10 @@
 import uuid
 from pathlib import Path
 from typing import Annotated
+from uuid import UUID
 
 import httpx
-from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
+from fastapi import APIRouter, Depends, File, Form, HTTPException, Response, UploadFile, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -87,3 +88,27 @@ async def upload_media(
     await session.commit()
     await session.refresh(media)
     return {"id": media.id, "url": media.public_url, "alt_text": media.alt_text}
+
+
+@router.delete("/{media_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_media(media_id: UUID, session: Session) -> Response:
+    media = await session.get(Media, media_id)
+    if media is None:
+        raise HTTPException(status_code=404, detail="Nie znaleziono pliku.")
+
+    settings = get_settings()
+    if settings.supabase_url and settings.supabase_service_role_key:
+        bucket = settings.supabase_media_bucket
+        delete_url = f"{settings.supabase_url}/storage/v1/object/{bucket}/{media.storage_path}"
+        headers = {
+            "Authorization": f"Bearer {settings.supabase_service_role_key}",
+            "apikey": settings.supabase_service_role_key,
+        }
+        async with httpx.AsyncClient(timeout=30) as client:
+            response = await client.delete(delete_url, headers=headers)
+        if response.status_code >= 400 and response.status_code != 404:
+            raise HTTPException(status_code=502, detail="Nie udało się usunąć pliku z Supabase Storage.")
+
+    await session.delete(media)
+    await session.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)

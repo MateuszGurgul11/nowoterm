@@ -15,19 +15,40 @@
     return parseJson(node.textContent || "[]", []);
   }
 
+  function addMediaItemToPageStore(item) {
+    var store = document.getElementById("media-data");
+    if (!store) return;
+    var items = parseJson(store.textContent || "[]", []);
+    items.unshift(item);
+    store.textContent = JSON.stringify(items);
+  }
+
   function openMediaPicker(onSelect) {
-    var items = mediaItemsFromPage();
     var overlay = document.createElement("div");
     overlay.className = "media-picker";
     overlay.innerHTML =
       '<div class="media-picker__dialog">' +
-      "<header><h3>Wybierz media</h3><button type=\"button\" class=\"link-button\" data-close>Zamknij</button></header>" +
+      '<header><h3>Wybierz media</h3><button type="button" class="link-button" data-close>Zamknij</button></header>' +
+      '<form class="media-picker__upload form-stack" data-picker-upload>' +
+      '<label>Prześlij nowe zdjęcie<input type="file" name="file" accept="image/jpeg,image/png,image/webp,image/avif,image/svg+xml" required></label>' +
+      '<label>Tekst alternatywny (alt)<input type="text" name="alt_text" maxlength="240" required placeholder="Opis zdjęcia"></label>' +
+      '<button class="button button--small button--accent" type="submit">Prześlij i użyj</button>' +
+      '<p class="media-picker__upload-status" data-upload-status></p>' +
+      "</form>" +
       '<div class="media-picker__grid"></div>' +
       "</div>";
+
     var grid = overlay.querySelector(".media-picker__grid");
-    if (!items.length) {
-      grid.innerHTML = '<p class="empty">Brak plików. Prześlij media w bibliotece.</p>';
-    } else {
+    var uploadForm = overlay.querySelector("[data-picker-upload]");
+    var status = overlay.querySelector("[data-upload-status]");
+
+    function renderGrid() {
+      var items = mediaItemsFromPage();
+      grid.innerHTML = "";
+      if (!items.length) {
+        grid.innerHTML = '<p class="empty">Brak plików. Prześlij zdjęcie powyżej.</p>';
+        return;
+      }
       items.forEach(function (item) {
         var btn = document.createElement("button");
         btn.type = "button";
@@ -46,12 +67,44 @@
         grid.appendChild(btn);
       });
     }
+
+    uploadForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var data = new FormData(uploadForm);
+      var submitBtn = uploadForm.querySelector("button[type=submit]");
+      submitBtn.disabled = true;
+      status.textContent = "Przesyłanie...";
+      fetch("/api/admin/media", { method: "POST", body: data })
+        .then(function (response) {
+          if (!response.ok) throw new Error("Upload nieudany");
+          return response.json();
+        })
+        .then(function (uploaded) {
+          var item = {
+            id: String(uploaded.id),
+            url: uploaded.url,
+            file_name: uploaded.alt_text || "plik",
+            alt_text: uploaded.alt_text || "",
+          };
+          addMediaItemToPageStore(item);
+          status.textContent = "";
+          submitBtn.disabled = false;
+          onSelect(item);
+          overlay.remove();
+        })
+        .catch(function (err) {
+          status.textContent = err.message || "Błąd uploadu";
+          submitBtn.disabled = false;
+        });
+    });
+
     overlay.addEventListener("click", function (event) {
       if (event.target === overlay || event.target.matches("[data-close]")) {
         overlay.remove();
       }
     });
     document.body.appendChild(overlay);
+    renderGrid();
   }
 
   function initBlockEditor(root) {
@@ -283,6 +336,87 @@
     render();
   }
 
+  function initResultsEditor(root) {
+    var input = root.querySelector('textarea[name="results_json"], input[name="results_json"]');
+    var list = root.querySelector("[data-results]");
+    if (!input || !list) return;
+    var items = parseJson(input.value || "[]", []);
+    if (!Array.isArray(items)) items = [];
+
+    function sync() {
+      input.value = JSON.stringify(items);
+    }
+
+    function render() {
+      list.innerHTML = "";
+      items.forEach(function (item, index) {
+        var card = document.createElement("article");
+        card.className = "gallery-card results-card";
+        card.dataset.index = String(index);
+        card.innerHTML =
+          '<label>Etykieta<input data-label value="' +
+          (item.label || "") +
+          '"></label>' +
+          '<label>Wartość<input data-value value="' +
+          (item.value || "") +
+          '"></label>' +
+          '<div class="gallery-card__actions">' +
+          '<button type="button" data-up>↑</button>' +
+          '<button type="button" data-down>↓</button>' +
+          '<button type="button" data-remove>×</button>' +
+          "</div>";
+        list.appendChild(card);
+      });
+      sync();
+    }
+
+    list.addEventListener("input", function (event) {
+      var card = event.target.closest(".results-card");
+      if (!card) return;
+      var index = Number(card.dataset.index);
+      if (event.target.matches("[data-label]")) items[index].label = event.target.value;
+      if (event.target.matches("[data-value]")) items[index].value = event.target.value;
+      sync();
+    });
+
+    list.addEventListener("click", function (event) {
+      var card = event.target.closest(".results-card");
+      if (!card) return;
+      var index = Number(card.dataset.index);
+      if (event.target.matches("[data-remove]")) {
+        items.splice(index, 1);
+        render();
+      } else if (event.target.matches("[data-up]") && index > 0) {
+        var prev = items[index - 1];
+        items[index - 1] = items[index];
+        items[index] = prev;
+        render();
+      } else if (event.target.matches("[data-down]") && index < items.length - 1) {
+        var next = items[index + 1];
+        items[index + 1] = items[index];
+        items[index] = next;
+        render();
+      }
+    });
+
+    var addBtn = root.querySelector("[data-add-result]");
+    if (addBtn) {
+      addBtn.addEventListener("click", function () {
+        items.push({ label: "", value: "" });
+        render();
+      });
+    }
+
+    var form = root.closest("form");
+    if (form) {
+      form.addEventListener("submit", function () {
+        sync();
+      });
+    }
+
+    render();
+  }
+
   function initCoverPicker(root) {
     var input = root.querySelector('input[name="cover_image_id"]');
     var preview = root.querySelector("[data-cover-preview]");
@@ -310,6 +444,52 @@
         setPreview("");
       });
     }
+  }
+
+  function initDashboardDelete() {
+    document.addEventListener("click", function (event) {
+      var pageBtn = event.target.closest("[data-delete-page]");
+      if (pageBtn) {
+        if (!window.confirm("Usunąć tę stronę? Tej operacji nie można cofnąć.")) return;
+        var pageId = pageBtn.getAttribute("data-delete-page");
+        fetch("/api/admin/pages/" + pageId, { method: "DELETE" })
+          .then(function (response) {
+            if (!response.ok) throw new Error("Nie udało się usunąć strony.");
+            pageBtn.closest("[data-page-id]").remove();
+          })
+          .catch(function (err) {
+            window.alert(err.message || "Błąd usuwania");
+          });
+        return;
+      }
+      var projectBtn = event.target.closest("[data-delete-project]");
+      if (projectBtn) {
+        if (!window.confirm("Usunąć tę realizację? Tej operacji nie można cofnąć.")) return;
+        var projectId = projectBtn.getAttribute("data-delete-project");
+        fetch("/api/admin/projects/" + projectId, { method: "DELETE" })
+          .then(function (response) {
+            if (!response.ok) throw new Error("Nie udało się usunąć realizacji.");
+            projectBtn.closest("[data-project-id]").remove();
+          })
+          .catch(function (err) {
+            window.alert(err.message || "Błąd usuwania");
+          });
+        return;
+      }
+      var caseStudyBtn = event.target.closest("[data-delete-case-study]");
+      if (caseStudyBtn) {
+        if (!window.confirm("Usunąć to case study? Tej operacji nie można cofnąć.")) return;
+        var caseStudyId = caseStudyBtn.getAttribute("data-delete-case-study");
+        fetch("/api/admin/case-studies/" + caseStudyId, { method: "DELETE" })
+          .then(function (response) {
+            if (!response.ok) throw new Error("Nie udało się usunąć case study.");
+            caseStudyBtn.closest("[data-case-study-id]").remove();
+          })
+          .catch(function (err) {
+            window.alert(err.message || "Błąd usuwania");
+          });
+      }
+    });
   }
 
   function initProjectSortable() {
@@ -352,6 +532,7 @@
         .then(function (item) {
           var card = document.createElement("article");
           card.className = "media-card";
+          card.setAttribute("data-media-id", String(item.id));
           card.innerHTML =
             '<img src="' +
             item.url +
@@ -362,20 +543,18 @@
             item.url +
             '</small><button type="button" class="button button--small" data-copy="' +
             item.url +
-            '">Kopiuj URL</button></div>';
+            '">Kopiuj URL</button>' +
+            '<button type="button" class="button button--small button--danger" data-delete-media="' +
+            item.id +
+            '">Usuń</button></div>';
           grid.prepend(card);
           form.reset();
-          var store = document.getElementById("media-data");
-          if (store) {
-            var items = parseJson(store.textContent || "[]", []);
-            items.unshift({
-              id: String(item.id),
-              url: item.url,
-              file_name: item.alt_text || "plik",
-              alt_text: item.alt_text || "",
-            });
-            store.textContent = JSON.stringify(items);
-          }
+          addMediaItemToPageStore({
+            id: String(item.id),
+            url: item.url,
+            file_name: item.alt_text || "plik",
+            alt_text: item.alt_text || "",
+          });
         })
         .catch(function (err) {
           window.alert(err.message || "Błąd uploadu");
@@ -383,21 +562,38 @@
     });
 
     grid.addEventListener("click", function (event) {
-      var btn = event.target.closest("[data-copy]");
-      if (!btn) return;
-      navigator.clipboard.writeText(btn.getAttribute("data-copy") || "");
-      btn.textContent = "Skopiowano";
-      setTimeout(function () {
-        btn.textContent = "Kopiuj URL";
-      }, 1200);
+      var copyBtn = event.target.closest("[data-copy]");
+      if (copyBtn) {
+        navigator.clipboard.writeText(copyBtn.getAttribute("data-copy") || "");
+        copyBtn.textContent = "Skopiowano";
+        setTimeout(function () {
+          copyBtn.textContent = "Kopiuj URL";
+        }, 1200);
+        return;
+      }
+      var deleteBtn = event.target.closest("[data-delete-media]");
+      if (deleteBtn) {
+        if (!window.confirm("Usunąć ten plik? Zniknie też ze wszystkich miejsc, w których jest użyty jako okładka.")) return;
+        var mediaId = deleteBtn.getAttribute("data-delete-media");
+        fetch("/api/admin/media/" + mediaId, { method: "DELETE" })
+          .then(function (response) {
+            if (!response.ok) throw new Error("Nie udało się usunąć pliku.");
+            deleteBtn.closest("[data-media-id]").remove();
+          })
+          .catch(function (err) {
+            window.alert(err.message || "Błąd usuwania");
+          });
+      }
     });
   }
 
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("[data-block-editor]").forEach(initBlockEditor);
     document.querySelectorAll("[data-gallery-editor]").forEach(initGalleryEditor);
+    document.querySelectorAll("[data-results-editor]").forEach(initResultsEditor);
     document.querySelectorAll("[data-cover-editor]").forEach(initCoverPicker);
     initProjectSortable();
     initMediaUpload();
+    initDashboardDelete();
   });
 })();

@@ -71,6 +71,17 @@ Po wdrożeniu kolumny kolejności uruchom migrację w Supabase SQL Editor:
 
 `supabase/migrations/20260721_add_project_sort_order.sql`
 
+## Panel pod /admin na głównej domenie
+
+Panel CMS (Render) nie jest osobnym adresem dla redaktora — `apps/web/vercel.json`
+przekierowuje (rewrite, nie redirect) `/admin/*`, `/api/admin/*` i `/static/*` z domeny
+Vercel do usługi `novoterm-cms` na Renderze. Dzięki temu wpisanie `<domena-strony>/admin`
+prowadzi od razu do logowania, bez osobnego hosta do zapamiętania.
+
+Jeśli publiczny adres usługi Render różni się od `https://novoterm-cms.onrender.com`
+(np. przez zmianę nazwy serwisu albo własną domenę), popraw `destination` we wszystkich
+regułach w `apps/web/vercel.json` na aktualny adres.
+
 ## Publikacja treści
 
 1. Redaktor zapisuje i publikuje treść w CMS.

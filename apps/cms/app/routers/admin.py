@@ -16,9 +16,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config import get_settings
 from app.database import get_session
-from app.models import ContentStatus, Media, Page, Project
+from app.models import CaseStudy, ContentStatus, Media, Page, Project
 from app.routers.content import apply_payload, commit_or_conflict
-from app.schemas import PagePayload, ProjectPayload
+from app.schemas import CaseStudyPayload, PagePayload, ProjectPayload
 from app.security import authenticate_supabase, require_admin
 
 router = APIRouter(prefix="/admin", tags=["admin"])
@@ -70,9 +70,15 @@ async def media_context(session: AsyncSession) -> list[dict[str, Any]]:
     ]
 
 
+def safe_next_path(raw: str | None) -> str:
+    if not raw or not raw.startswith("/admin") or raw.startswith("//"):
+        return "/admin"
+    return raw
+
+
 @router.get("/login", response_class=HTMLResponse)
-async def login_page(request: Request) -> HTMLResponse:
-    return templates.TemplateResponse(request, "login.html", {"error": None})
+async def login_page(request: Request, next: str | None = None) -> HTMLResponse:
+    return templates.TemplateResponse(request, "login.html", {"error": None, "next": safe_next_path(next)})
 
 
 @router.post("/login", response_class=HTMLResponse, response_model=None)
@@ -80,20 +86,21 @@ async def login(
     request: Request,
     email: Annotated[str, Form()],
     password: Annotated[str, Form()],
+    next: Annotated[str, Form()] = "/admin",
 ) -> HTMLResponse | RedirectResponse:
     authenticated_email = await authenticate_supabase(email, password)
     if not authenticated_email:
         return templates.TemplateResponse(
             request,
             "login.html",
-            {"error": "Nieprawidłowy email lub hasło."},
+            {"error": "Nieprawidłowy email lub hasło.", "next": safe_next_path(next)},
             status_code=401,
         )
 
     request.session.clear()
     request.session["admin_username"] = authenticated_email
     request.session["csrf_token"] = secrets.token_urlsafe(32)
-    return redirect("/admin")
+    return redirect(safe_next_path(next))
 
 
 @router.post("/logout")
@@ -111,6 +118,7 @@ async def dashboard(
 ) -> HTMLResponse:
     page_count = await session.scalar(select(func.count()).select_from(Page))
     project_count = await session.scalar(select(func.count()).select_from(Project))
+    case_study_count = await session.scalar(select(func.count()).select_from(CaseStudy))
     pages = list(
         (await session.scalars(select(Page).order_by(Page.updated_at.desc()).limit(12))).all()
     )
@@ -121,14 +129,19 @@ async def dashboard(
             )
         ).all()
     )
+    case_studies = list(
+        (await session.scalars(select(CaseStudy).order_by(CaseStudy.updated_at.desc()))).all()
+    )
     return templates.TemplateResponse(
         request,
         "dashboard.html",
         {
             "page_count": page_count or 0,
             "project_count": project_count or 0,
+            "case_study_count": case_study_count or 0,
             "pages": pages,
             "projects": projects,
+            "case_studies": case_studies,
             "csrf_token": request.session["csrf_token"],
         },
     )
@@ -323,6 +336,99 @@ async def save_project(
         raise HTTPException(status_code=404, detail="Nie znaleziono realizacji.")
     apply_payload(project, payload)
     session.add(project)
+    await commit_or_conflict(session)
+    return redirect("/admin")
+
+
+async def project_options(session: AsyncSession) -> list[dict[str, str]]:
+    rows = list((await session.scalars(select(Project).order_by(Project.title.asc()))).all())
+    return [{"id": str(item.id), "title": item.title} for item in rows]
+
+
+@router.get("/case-studies/new", response_class=HTMLResponse)
+@router.get("/case-studies/{case_study_id}/edit", response_class=HTMLResponse)
+async def case_study_form(
+    request: Request,
+    session: Session,
+    case_study_id: UUID | None = None,
+    _: str = Depends(require_admin),
+) -> HTMLResponse:
+    case_study = await session.get(CaseStudy, case_study_id) if case_study_id else None
+    if case_study_id and case_study is None:
+        raise HTTPException(status_code=404, detail="Nie znaleziono case study.")
+    solution = case_study.solution if case_study else {"blocks": []}
+    if "blocks" not in solution:
+        solution = {"blocks": []}
+    return templates.TemplateResponse(
+        request,
+        "case_study_form.html",
+        {
+            "case_study": case_study,
+            "content_json": json.dumps(solution, ensure_ascii=False),
+            "results_json": json.dumps(
+                case_study.results if case_study else [], ensure_ascii=False
+            ),
+            "projects": await project_options(session),
+            "media_items": await media_context(session),
+            "csrf_token": request.session["csrf_token"],
+            "error": None,
+        },
+    )
+
+
+@router.post("/case-studies/save", response_class=HTMLResponse, response_model=None)
+async def save_case_study(
+    request: Request,
+    session: Session,
+    csrf_token: Annotated[str, Form()],
+    slug: Annotated[str, Form()],
+    title: Annotated[str, Form()],
+    challenge: Annotated[str, Form()],
+    seo_title: Annotated[str, Form()],
+    seo_description: Annotated[str, Form()],
+    content_json: Annotated[str, Form()],
+    results_json: Annotated[str, Form()],
+    content_status: Annotated[ContentStatus, Form()],
+    project_id: Annotated[str, Form()] = "",
+    cover_image_id: Annotated[str, Form()] = "",
+    case_study_id: Annotated[UUID | None, Form()] = None,
+    _: str = Depends(require_admin),
+) -> HTMLResponse | RedirectResponse:
+    ensure_csrf(request, csrf_token)
+    form_error_context = {
+        "case_study": None,
+        "content_json": content_json,
+        "results_json": results_json,
+        "projects": await project_options(session),
+        "media_items": await media_context(session),
+        "csrf_token": csrf_token,
+    }
+    try:
+        payload = CaseStudyPayload(
+            project_id=parse_optional_uuid(project_id),
+            slug=slug,
+            title=title,
+            challenge=challenge,
+            cover_image_id=parse_optional_uuid(cover_image_id),
+            seo_title=seo_title,
+            seo_description=seo_description,
+            solution=json.loads(content_json),
+            results=json.loads(results_json),
+            status=content_status,
+        )
+    except (json.JSONDecodeError, ValidationError, ValueError) as exc:
+        return templates.TemplateResponse(
+            request,
+            "case_study_form.html",
+            {**form_error_context, "error": str(exc)},
+            status_code=422,
+        )
+
+    case_study = await session.get(CaseStudy, case_study_id) if case_study_id else CaseStudy()
+    if case_study is None:
+        raise HTTPException(status_code=404, detail="Nie znaleziono case study.")
+    apply_payload(case_study, payload)
+    session.add(case_study)
     await commit_or_conflict(session)
     return redirect("/admin")
 

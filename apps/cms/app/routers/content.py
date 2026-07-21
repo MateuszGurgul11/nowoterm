@@ -8,8 +8,15 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_session
-from app.models import ContentStatus, Page, Project
-from app.schemas import PagePayload, PageResponse, ProjectPayload, ProjectResponse
+from app.models import CaseStudy, ContentStatus, Page, Project
+from app.schemas import (
+    CaseStudyPayload,
+    CaseStudyResponse,
+    PagePayload,
+    PageResponse,
+    ProjectPayload,
+    ProjectResponse,
+)
 from app.security import require_admin
 
 router = APIRouter(
@@ -22,11 +29,11 @@ Session = Annotated[AsyncSession, Depends(get_session)]
 
 from typing import TypeVar
 
-ModelT = TypeVar("ModelT", Page, Project)
+ModelT = TypeVar("ModelT", Page, Project, CaseStudy)
 
 
 def apply_payload(
-    model: ModelT, payload: PagePayload | ProjectPayload
+    model: ModelT, payload: PagePayload | ProjectPayload | CaseStudyPayload
 ) -> ModelT:
     values = payload.model_dump()
     for field, value in values.items():
@@ -121,5 +128,44 @@ async def delete_project(project_id: UUID, session: Session) -> Response:
     if project is None:
         raise HTTPException(status_code=404, detail="Nie znaleziono realizacji.")
     await session.delete(project)
+    await session.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@router.get("/case-studies", response_model=list[CaseStudyResponse])
+async def list_case_studies(session: Session) -> list[CaseStudy]:
+    return list(
+        (await session.scalars(select(CaseStudy).order_by(CaseStudy.updated_at.desc()))).all()
+    )
+
+
+@router.post("/case-studies", response_model=CaseStudyResponse, status_code=status.HTTP_201_CREATED)
+async def create_case_study(payload: CaseStudyPayload, session: Session) -> CaseStudy:
+    case_study = apply_payload(CaseStudy(), payload)
+    session.add(case_study)
+    await commit_or_conflict(session)
+    await session.refresh(case_study)
+    return case_study
+
+
+@router.put("/case-studies/{case_study_id}", response_model=CaseStudyResponse)
+async def update_case_study(
+    case_study_id: UUID, payload: CaseStudyPayload, session: Session
+) -> CaseStudy:
+    case_study = await session.get(CaseStudy, case_study_id)
+    if case_study is None:
+        raise HTTPException(status_code=404, detail="Nie znaleziono case study.")
+    apply_payload(case_study, payload)
+    await commit_or_conflict(session)
+    await session.refresh(case_study)
+    return case_study
+
+
+@router.delete("/case-studies/{case_study_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_case_study(case_study_id: UUID, session: Session) -> Response:
+    case_study = await session.get(CaseStudy, case_study_id)
+    if case_study is None:
+        raise HTTPException(status_code=404, detail="Nie znaleziono case study.")
+    await session.delete(case_study)
     await session.commit()
     return Response(status_code=status.HTTP_204_NO_CONTENT)

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}{{ "Edytuj" if case_study else "Dodaj" }} case study — Novoterm CMS{% endblock %}
+{% block content %}
+<div class="page-head">
+  <div><p class="eyebrow">Case study</p><h1>{{ "Edytuj case study" if case_study else "Nowe case study" }}</h1></div>
+  <a class="back-link" href="/admin">Wróć do panelu</a>
+</div>
+{% if error %}<div class="alert"><strong>Popraw dane:</strong> {{ error }}</div>{% endif %}
+<script type="application/json" id="media-data">{{ media_items | tojson }}</script>
+<form class="editor" method="post" action="/admin/case-studies/save">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  {% if case_study %}<input type="hidden" name="case_study_id" value="{{ case_study.id }}">{% endif %}
+  <div class="editor-grid">
+    <section class="panel form-stack">
+      <h2>Case study</h2>
+      <label>Tytuł<input name="title" required value="{{ case_study.title if case_study else '' }}"></label>
+      <label>Slug<input name="slug" required pattern="[a-z0-9]+(?:-[a-z0-9]+)*" value="{{ case_study.slug if case_study else '' }}"></label>
+      <label>Powiązana realizacja
+        <select name="project_id">
+          <option value="">— brak —</option>
+          {% for project in projects %}
+          <option value="{{ project.id }}" {% if case_study and case_study.project_id and case_study.project_id|string == project.id %}selected{% endif %}>{{ project.title }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>Wyzwanie (challenge)<textarea name="challenge" rows="4">{{ case_study.challenge if case_study else '' }}</textarea></label>
+
+      <div class="cover-editor" data-cover-editor>
+        <h3>Okładka</h3>
+        <input type="hidden" name="cover_image_id" value="{{ case_study.cover_image_id if case_study and case_study.cover_image_id else '' }}">
+        <div class="cover-preview" data-cover-preview>
+          {% if case_study and case_study.cover_image_id %}
+            {% set cover = media_items | selectattr('id', 'equalto', case_study.cover_image_id|string) | list %}
+            {% if cover %}
+            <img src="{{ cover[0].url }}" alt="Okładka">
+            {% else %}
+            <span>Wybrano ID okładki (podgląd niedostępny)</span>
+            {% endif %}
+          {% else %}
+          <span>Brak okładki</span>
+          {% endif %}
+        </div>
+        <div class="inline-actions">
+          <button type="button" class="button button--small" data-cover-pick>Wybierz okładkę</button>
+          <button type="button" class="button button--small" data-cover-clear>Usuń</button>
+        </div>
+      </div>
+
+      <div class="results-editor" data-results-editor>
+        <div class="block-toolbar">
+          <h3>Wyniki (liczby)</h3>
+          <button type="button" class="button button--small" data-add-result>Dodaj wynik</button>
+        </div>
+        <div data-results class="results-list"></div>
+        <textarea name="results_json" hidden>{{ results_json }}</textarea>
+      </div>
+
+      <div class="block-editor" data-block-editor>
+        <div class="block-toolbar">
+          <h3>Rozwiązanie (treść)</h3>
+          <div>
+            <button type="button" class="button button--small" data-add-block="heading">Nagłówek</button>
+            <button type="button" class="button button--small" data-add-block="paragraph">Akapit</button>
+            <button type="button" class="button button--small" data-add-block="list">Lista</button>
+            <button type="button" class="button button--small" data-add-block="quote">Cytat</button>
+            <button type="button" class="button button--small" data-add-block="image">Obraz</button>
+          </div>
+        </div>
+        <div data-blocks class="block-list"></div>
+        <textarea name="content_json" hidden>{{ content_json }}</textarea>
+      </div>
+    </section>
+    <aside class="panel form-stack">
+      <h2>Publikacja i SEO</h2>
+      <label>Status
+        <select name="content_status">
+          {% for value in ["draft", "published", "archived"] %}
+          <option value="{{ value }}" {% if case_study and case_study.status.value == value %}selected{% endif %}>{{ value }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>SEO title <span class="hint">maks. 70 znaków</span><input name="seo_title" maxlength="70" required value="{{ case_study.seo_title if case_study else '' }}"></label>
+      <label>SEO description <span class="hint">maks. 180 znaków</span><textarea name="seo_description" maxlength="180" rows="5" required>{{ case_study.seo_description if case_study else '' }}</textarea></label>
+      <button class="button button--accent" type="submit">Zapisz case study</button>
+    </aside>
+  </div>
+</form>
+{% endblock %}

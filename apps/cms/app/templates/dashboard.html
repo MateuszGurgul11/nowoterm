@@ -22,6 +22,7 @@
 <section class="stats">
   <article><strong>{{ page_count }}</strong><span>stron</span></article>
   <article><strong>{{ project_count }}</strong><span>realizacji</span></article>
+  <article><strong>{{ case_study_count }}</strong><span>case studies</span></article>
 </section>
 
 <section class="panel">
@@ -31,10 +32,13 @@
   </div>
   <div class="content-list">
     {% for page in pages %}
-    <a href="/admin/pages/{{ page.id }}/edit">
-      <span><strong>{{ page.title }}</strong><small>/{{ page.slug }}</small></span>
-      <span class="status status--{{ page.status.value }}">{{ page.status.value }}</span>
-    </a>
+    <div class="content-list__row" data-page-id="{{ page.id }}">
+      <a href="/admin/pages/{{ page.id }}/edit">
+        <span><strong>{{ page.title }}</strong><small>/{{ page.slug }}</small></span>
+        <span class="status status--{{ page.status.value }}">{{ page.status.value }}</span>
+      </a>
+      <button type="button" class="button button--small button--danger" data-delete-page="{{ page.id }}">Usuń</button>
+    </div>
     {% else %}
     <p class="empty">Brak stron w CMS. Obecny frontend nadal korzysta z treści zmigrowanych z HTML.</p>
     {% endfor %}
@@ -61,9 +65,30 @@
         </span>
         <span class="status status--{{ project.status.value }}">{{ project.status.value }}</span>
       </a>
+      <button type="button" class="button button--small button--danger" data-delete-project="{{ project.id }}">Usuń</button>
     </div>
     {% else %}
     <p class="empty">Dodaj pierwszą realizację, aby przygotować przyszłe case study.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="panel">
+  <div class="panel-head">
+    <h2>Case studies</h2>
+    <a class="button button--small" href="/admin/case-studies/new">Dodaj case study</a>
+  </div>
+  <div class="content-list">
+    {% for case_study in case_studies %}
+    <div class="content-list__row" data-case-study-id="{{ case_study.id }}">
+      <a href="/admin/case-studies/{{ case_study.id }}/edit">
+        <span><strong>{{ case_study.title }}</strong><small>/{{ case_study.slug }}</small></span>
+        <span class="status status--{{ case_study.status.value }}">{{ case_study.status.value }}</span>
+      </a>
+      <button type="button" class="button button--small button--danger" data-delete-case-study="{{ case_study.id }}">Usuń</button>
+    </div>
+    {% else %}
+    <p class="empty">Brak case studies. Dodaj pierwsze na podstawie zakończonej realizacji.</p>
     {% endfor %}
   </div>
 </section>

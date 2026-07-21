@@ -41,6 +41,8 @@ def require_admin(request: Request) -> str:
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Zaloguj się do panelu CMS.",
         )
+    if not request.session.get("csrf_token"):
+        request.session["csrf_token"] = secrets.token_urlsafe(32)
     return str(username)
 
 

@@ -62,6 +62,28 @@ class ProjectResponse(ProjectPayload):
     updated_at: datetime
 
 
+class CaseStudyPayload(BaseModel):
+    project_id: UUID | None = None
+    slug: str = Field(pattern=SLUG_PATTERN, max_length=120)
+    title: str = Field(min_length=1, max_length=180)
+    challenge: str = Field(default="", max_length=2000)
+    solution: dict[str, Any] = Field(default_factory=dict)
+    results: list[dict[str, Any]] = Field(default_factory=list)
+    cover_image_id: UUID | None = None
+    seo_title: str = Field(min_length=1, max_length=70)
+    seo_description: str = Field(min_length=1, max_length=180)
+    status: ContentStatus = ContentStatus.DRAFT
+
+
+class CaseStudyResponse(CaseStudyPayload):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: UUID
+    published_at: datetime | None
+    created_at: datetime
+    updated_at: datetime
+
+
 class PublishResponse(BaseModel):
     accepted: bool
     message: str
