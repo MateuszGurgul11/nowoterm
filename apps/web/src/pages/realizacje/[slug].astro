@@ -20,7 +20,10 @@ const { project } = Astro.props;
 
 <Layout title={project.seo_title} description={project.seo_description} solidHeader={true}>
   <main>
-    <section class="page-hero">
+    <section
+      class:list={["page-hero", { "page-hero--media": !!project.cover_image }]}
+      style={project.cover_image ? `background-image: url('${project.cover_image}')` : undefined}
+    >
       <div class="wrap">
         <nav class="crumbs" aria-label="Okruszki">
           <a href="/">Novoterm</a><span class="sep">/</span>
@@ -45,6 +48,19 @@ const { project } = Astro.props;
 </Layout>
 
 <style>
+  .page-hero--media {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+  }
+  .page-hero--media::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(14, 16, 19, 0.75) 0%, rgba(14, 16, 19, 0.55) 45%, rgba(14, 16, 19, 0.85) 100%);
+  }
+  .page-hero--media .wrap { position: relative; z-index: 1; }
+
   .project-facts { padding-block: 30px; border-bottom: 1px solid var(--line); background: var(--bg-soft); }
   .project-facts .wrap { display: flex; gap: clamp(28px, 7vw, 90px); flex-wrap: wrap; }
   .project-facts div { display: grid; gap: 4px; }

@@ -40,10 +40,14 @@ function formatArea(area: number | null | undefined): string | null {
               <article class="work" data-reveal data-cat={categoryFilterKey(project.category)}>
                 <a href={`/realizacje/${project.slug}`} aria-label={`Zobacz realizację: ${project.title}`}>
                   <div class="work-media">
-                    <svg viewBox="0 0 400 300" aria-hidden="true">
-                      <path d="M60 220 V110 H340 V220 Z" stroke="#9aa0a8" stroke-width="1.2" fill="none" />
-                      <path d="M60 165 H340" stroke="#ff914d" stroke-width="1.6" />
-                    </svg>
+                    {project.cover_image ? (
+                      <img src={project.cover_image} alt={project.title} loading="lazy" />
+                    ) : (
+                      <svg viewBox="0 0 400 300" aria-hidden="true">
+                        <path d="M60 220 V110 H340 V220 Z" stroke="#9aa0a8" stroke-width="1.2" fill="none" />
+                        <path d="M60 165 H340" stroke="#ff914d" stroke-width="1.6" />
+                      </svg>
+                    )}
                   </div>
                   <div class="work-body">
                     <span class="work-cat">{project.category}</span>

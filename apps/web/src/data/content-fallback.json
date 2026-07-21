@@ -249,7 +249,7 @@
       "area_m2": 860.0,
       "duration": "11 tygodni",
       "completion_date": null,
-      "featured": true,
+      "featured": false,
       "cover_image_id": null,
       "gallery": [],
       "content": {
@@ -529,6 +529,47 @@
       "published_at": "2026-07-16T15:38:02.644204+00:00",
       "created_at": "2026-07-16T15:38:02.644204+00:00",
       "updated_at": "2026-07-16T15:38:02.644204+00:00"
+    },
+    {
+      "id": "c4f1a6d2-7e5b-4a8f-9c31-2b6e8d4a7f10",
+      "slug": "sucha-zabudowa-sad-apelacyjny-poznan",
+      "title": "Sucha zabudowa - Sąd Apelacyjny w Poznaniu",
+      "excerpt": "Jako podwykonawca zrealizowaliśmy suchą zabudowę dla EBS BUD Sp. z o.o. przy budowie budynku Sądu Apelacyjnego w Poznaniu.",
+      "category": "Budynki usługowe",
+      "location": "Poznań",
+      "area_m2": null,
+      "duration": "podwykonawstwo - sucha zabudowa",
+      "completion_date": null,
+      "featured": true,
+      "cover_image": "/assets/photos/sad-apelacyjny-poznan.webp",
+      "gallery": [],
+      "content": {
+        "blocks": [
+          {
+            "text": "Jako podwykonawca zrealizowaliśmy suchą zabudowę dla EBS BUD Sp. z o.o. w ramach budowy budynku dla Sądu Apelacyjnego w Poznaniu i XII Wydziału Gospodarczego Sądu Rejonowego.",
+            "type": "paragraph"
+          },
+          {
+            "text": "Informacje o inwestycji",
+            "type": "heading",
+            "level": 2
+          },
+          {
+            "type": "list",
+            "items": [
+              "Inwestycja: Budowa budynku dla Sądu Apelacyjnego w Poznaniu i XII Wydziału Gospodarczego Sądu Rejonowego",
+              "Inwestor: Sąd Apelacyjny w Poznaniu",
+              "Adres: Stare Miasto w Poznaniu, przy ul. St. Hejmowskiego 3"
+            ]
+          }
+        ]
+      },
+      "seo_title": "Sucha zabudowa - Sąd Apelacyjny w Poznaniu | Novoterm",
+      "seo_description": "Realizacja Novoterm jako podwykonawcy: sucha zabudowa przy budowie budynku Sądu Apelacyjnego w Poznaniu dla EBS BUD Sp. z o.o.",
+      "status": "published",
+      "published_at": "2026-07-21T00:00:00.000000+00:00",
+      "created_at": "2026-07-21T00:00:00.000000+00:00",
+      "updated_at": "2026-07-21T00:00:00.000000+00:00"
     }
   ],
   "posts": [],

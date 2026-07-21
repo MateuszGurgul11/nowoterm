@@ -257,7 +257,7 @@ body.nav-open .nav-toggle::after { top: 21px; transform: rotate(-45deg); }
   font-size: 18px; font-weight: 250; line-height: 1.7;
   color: #fff;
 }
-.hero-note b { color: #fff; font-weight: 250; }
+.hero-note b { color: var(--accent); font-weight: 400; }
 
 .hero-center { position: relative; z-index: 2; display: grid; justify-items: center; gap: 26px; padding-inline: var(--pad); width: 100%; }
 
@@ -421,7 +421,9 @@ blockquote.quote footer { font-size: 18px; font-style: normal; letter-spacing: 0
   position: relative;
 }
 .work-media svg { width: 78%; height: 78%; opacity: 0.9; transition: transform 0.6s ease; }
-.work:hover .work-media svg { transform: scale(1.05); }
+.work-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.work:hover .work-media svg,
+.work:hover .work-media img { transform: scale(1.05); }
 .work-body { padding: 22px 4px 0; display: grid; gap: 7px; }
 .work-cat { font-size: 18px; font-weight: 250; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); }
 .work h3 { font-size: 18.5px; font-weight: 250; line-height: 1.35; }

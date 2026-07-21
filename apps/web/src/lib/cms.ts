@@ -27,6 +27,7 @@ export type CmsProject = CmsEntry & {
   duration: string | null;
   completion_date: string | null;
   featured?: boolean;
+  cover_image?: string | null;
   gallery: Array<{ src: string; alt: string }>;
 };
 
