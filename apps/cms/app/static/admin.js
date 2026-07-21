@@ -15,6 +15,17 @@
     return parseJson(node.textContent || "[]", []);
   }
 
+  function readErrorDetail(response) {
+    return response
+      .json()
+      .then(function (body) {
+        return (body && body.detail) || "Upload nieudany (" + response.status + ").";
+      })
+      .catch(function () {
+        return "Upload nieudany (" + response.status + ").";
+      });
+  }
+
   function addMediaItemToPageStore(item) {
     var store = document.getElementById("media-data");
     if (!store) return;
@@ -76,7 +87,11 @@
       status.textContent = "Przesyłanie...";
       fetch("/api/admin/media", { method: "POST", body: data })
         .then(function (response) {
-          if (!response.ok) throw new Error("Upload nieudany");
+          if (!response.ok) {
+            return readErrorDetail(response).then(function (message) {
+              throw new Error(message);
+            });
+          }
           return response.json();
         })
         .then(function (uploaded) {
@@ -526,7 +541,11 @@
       var data = new FormData(form);
       fetch("/api/admin/media", { method: "POST", body: data })
         .then(function (response) {
-          if (!response.ok) throw new Error("Upload nieudany");
+          if (!response.ok) {
+            return readErrorDetail(response).then(function (message) {
+              throw new Error(message);
+            });
+          }
           return response.json();
         })
         .then(function (item) {
