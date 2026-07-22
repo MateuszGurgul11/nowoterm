@@ -170,25 +170,30 @@ h1, h2, h3, h4 { font-weight: 250; line-height: 1.18; text-wrap: balance; }
 
 .nav-drop { position: relative; }
 .nav-drop-menu {
-  position: absolute; top: calc(100% + 16px); left: 50%; transform: translate(-50%, 8px);
   min-width: 260px;
-  background: var(--dark);
-  border: 1px solid var(--dark-line);
   padding: 10px 0;
   display: grid;
-  opacity: 0; visibility: hidden;
-  transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
 }
-.nav-drop:hover .nav-drop-menu,
-.nav-drop:focus-within .nav-drop-menu { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
 .nav-drop-menu a {
   padding: 12px 24px;
-  font-size: 18px; font-weight: 250; letter-spacing: 0.18em; text-transform: uppercase;
+  font-size: 18px; font-weight: 250; letter-spacing: 0.18em; text-transform: none;
   color: #fff;
   text-align: center;
   transition: color 0.2s, background 0.2s;
 }
 .nav-drop-menu a:hover { color: #fff; background: rgba(255, 255, 255, 0.04); }
+
+@media (min-width: 1101px) {
+  .nav-drop-menu {
+    position: absolute; top: calc(100% + 16px); left: 50%; transform: translate(-50%, 8px);
+    background: var(--dark);
+    border: 1px solid var(--dark-line);
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.25s, transform 0.25s, visibility 0.25s;
+  }
+  .nav-drop:hover .nav-drop-menu,
+  .nav-drop:focus-within .nav-drop-menu { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+}
 
 .header-tel {
   font-size: 18px; font-weight: 250; letter-spacing: 0.12em;
@@ -602,7 +607,10 @@ body.nav-open { overflow: hidden; }
   .nav-drop-menu {
     position: static; transform: none; opacity: 1; visibility: visible;
     border: 0; background: transparent; padding: 4px 0 0; display: none;
+    min-width: auto;
   }
+  .nav-drop:hover .nav-drop-menu,
+  .nav-drop:focus-within .nav-drop-menu { transform: none; }
   .nav-drop.is-open .nav-drop-menu { display: grid; }
   .nav-drop-menu a { font-size: 18px; padding: 9px 0; }
   .nav-toggle { display: block; }
