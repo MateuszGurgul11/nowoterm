@@ -17,16 +17,47 @@
 
   /* ---------- mobile nav ---------- */
   var toggle = document.querySelector(".nav-toggle");
-  if (toggle) {
+  var nav = document.querySelector(".nav");
+  var mobileNavQuery = window.matchMedia("(max-width: 1200px)");
+
+  function closeNav() {
+    document.body.classList.remove("nav-open");
+    if (toggle) toggle.setAttribute("aria-expanded", "false");
+  }
+
+  function updateDropAria(drop) {
+    var btn = drop.querySelector("button");
+    if (btn) btn.setAttribute("aria-expanded", drop.classList.contains("is-open") ? "true" : "false");
+  }
+
+  if (toggle && nav) {
     toggle.addEventListener("click", function () {
-      document.body.classList.toggle("nav-open");
-      toggle.setAttribute("aria-expanded", document.body.classList.contains("nav-open"));
+      var open = document.body.classList.toggle("nav-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
     });
+
     document.querySelectorAll(".nav a").forEach(function (a) {
-      a.addEventListener("click", function () { document.body.classList.remove("nav-open"); });
+      a.addEventListener("click", closeNav);
     });
+
     document.querySelectorAll(".nav-drop > button").forEach(function (b) {
-      b.addEventListener("click", function () { b.parentElement.classList.toggle("is-open"); });
+      var drop = b.parentElement;
+      updateDropAria(drop);
+      b.addEventListener("click", function () {
+        if (!mobileNavQuery.matches) return;
+        drop.classList.toggle("is-open");
+        updateDropAria(drop);
+      });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && document.body.classList.contains("nav-open")) {
+        closeNav();
+        document.querySelectorAll(".nav-drop.is-open").forEach(function (drop) {
+          drop.classList.remove("is-open");
+          updateDropAria(drop);
+        });
+      }
     });
   }
 

@@ -20,7 +20,7 @@ const specializationsActive = path.startsWith("/specjalizacje-");
         Generalne wykonawstwo
       </a>
       <div class:list={["nav-drop", { "is-open": specializationsActive }]}>
-        <button type="button" aria-haspopup="true" aria-expanded={specializationsActive}>
+        <button type="button" aria-haspopup="true" aria-expanded={specializationsActive ? "true" : "false"}>
           Specjalizacje <span aria-hidden="true">▾</span>
         </button>
         <div class="nav-drop-menu">
