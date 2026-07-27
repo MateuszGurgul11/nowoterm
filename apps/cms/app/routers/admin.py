@@ -1,7 +1,6 @@
 import json
 import secrets
-from datetime import UTC, date, datetime
-from decimal import Decimal, InvalidOperation
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Annotated, Any
 from uuid import UUID
@@ -34,21 +33,6 @@ def ensure_csrf(request: Request, token: str) -> None:
     expected = request.session.get("csrf_token", "")
     if not expected or not secrets.compare_digest(expected, token):
         raise HTTPException(status_code=403, detail="Nieprawidłowy token formularza.")
-
-
-def parse_optional_decimal(raw: str | None) -> Decimal | None:
-    if raw is None or not str(raw).strip():
-        return None
-    try:
-        return Decimal(str(raw).strip().replace(",", "."))
-    except (InvalidOperation, ValueError) as exc:
-        raise ValueError("Nieprawidłowa wartość metrażu.") from exc
-
-
-def parse_optional_date(raw: str | None) -> date | None:
-    if raw is None or not str(raw).strip():
-        return None
-    return date.fromisoformat(str(raw).strip())
 
 
 def parse_optional_uuid(raw: str | None) -> UUID | None:
@@ -282,9 +266,9 @@ async def save_project(
     content_json: Annotated[str, Form()],
     gallery_json: Annotated[str, Form()],
     content_status: Annotated[ContentStatus, Form()],
-    area_m2: Annotated[str, Form()] = "",
+    investor: Annotated[str, Form()] = "",
     duration: Annotated[str, Form()] = "",
-    completion_date: Annotated[str, Form()] = "",
+    completion_year: Annotated[str, Form()] = "",
     cover_image_id: Annotated[str, Form()] = "",
     featured: Annotated[str | None, Form()] = None,
     project_id: Annotated[UUID | None, Form()] = None,
@@ -311,9 +295,9 @@ async def save_project(
             excerpt=excerpt,
             category=category,
             location=location or None,
-            area_m2=parse_optional_decimal(area_m2),
+            investor=investor.strip() or None,
             duration=duration.strip() or None,
-            completion_date=parse_optional_date(completion_date),
+            completion_year=completion_year.strip() or None,
             featured=featured in {"on", "true", "1"},
             sort_order=sort_order,
             cover_image_id=parse_optional_uuid(cover_image_id),

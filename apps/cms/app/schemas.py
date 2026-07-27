@@ -1,9 +1,8 @@
-from datetime import date, datetime
-from decimal import Decimal
+from datetime import datetime
 from typing import Any
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field
 
 from app.models import ContentStatus
 
@@ -35,9 +34,9 @@ class ProjectPayload(BaseModel):
     excerpt: str = Field(default="", max_length=500)
     category: str = Field(min_length=1, max_length=80)
     location: str | None = Field(default=None, max_length=120)
-    area_m2: Decimal | None = Field(default=None, gt=0)
+    investor: str | None = Field(default=None, max_length=180)
     duration: str | None = Field(default=None, max_length=80)
-    completion_date: date | None = None
+    completion_year: str | None = Field(default=None, max_length=40)
     featured: bool = False
     sort_order: int = 0
     cover_image_id: UUID | None = None
@@ -46,11 +45,6 @@ class ProjectPayload(BaseModel):
     seo_title: str = Field(min_length=1, max_length=70)
     seo_description: str = Field(min_length=1, max_length=180)
     status: ContentStatus = ContentStatus.DRAFT
-
-    @field_validator("area_m2")
-    @classmethod
-    def normalize_area(cls, value: Decimal | None) -> Decimal | None:
-        return value.quantize(Decimal("0.01")) if value is not None else None
 
 
 class ProjectResponse(ProjectPayload):

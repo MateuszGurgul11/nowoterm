@@ -7,11 +7,6 @@ const description = "Generalny wykonawca prac wykończeniowych obiektów biurowy
 
 const { projects } = await getContentSnapshot();
 const featured = projects.filter((p) => p.featured).slice(0, 3);
-
-function formatArea(area: number | null | undefined): string | null {
-  if (area == null) return null;
-  return `${Number(area).toLocaleString("pl-PL")} m²`;
-}
 ---
 
 <Layout {title} {description} solidHeader={false}>
@@ -83,13 +78,13 @@ function formatArea(area: number | null | undefined): string | null {
           <article class="pillar" data-reveal>
             <span class="pillar-no">01</span>
             <h3>Generalne wykonawstwo</h3>
-            <p>Budynki usługowe 1000–2000 m² realizowane pod klucz. Jeden punkt kontaktu
+            <p>Budynki usługowe 2000 m² realizowane pod klucz. Jeden punkt kontaktu
                i pełna odpowiedzialność za termin, budżet i podwykonawców.</p>
             <a class="link-more" href="/generalne-wykonawstwo">Więcej</a>
           </article>
           <article class="pillar" data-reveal>
             <span class="pillar-no">02</span>
-            <h3>Hale biurowe</h3>
+            <h3>Powierzchnie biurowe</h3>
             <p>Nasza kompetencja flagowa - wykończenia powierzchni biurowych w obiektach
                halowych i przemysłowych. Od stanu surowego po przekazanie najemcy.</p>
             <a class="link-more" href="/specjalizacje-hale-biurowe">Więcej</a>
@@ -97,8 +92,13 @@ function formatArea(area: number | null | undefined): string | null {
           <article class="pillar" data-reveal>
             <span class="pillar-no">03</span>
             <h3>Specjalizacje techniczne</h3>
-            <p>Izolacje natryskowe pianą PUR oraz systemowa sucha zabudowa -
-               własne zespoły wykonawcze i parametry potwierdzone kartami technicznymi.</p>
+            <ul class="pillar-list">
+              <li>- Izolacje natryskowe pianą PUR</li>
+              <li>- Systemowa sucha zabudowa</li>
+              <li>- Sufity podwieszane</li>
+              <li>- Konstrukcje stalowe</li>
+            </ul>
+ 
             <a class="link-more" href="/specjalizacje-izolacje-pur">Więcej</a>
           </article>
         </div>
@@ -112,15 +112,15 @@ function formatArea(area: number | null | undefined): string | null {
         <h2 data-reveal>Doświadczenie, które można zmierzyć</h2>
         <div class="stats">
           <div class="stat" data-reveal>
-            <span class="stat-val"><span data-count="38500">0</span><span class="u">m²</span></span>
+            <span class="stat-val"><span data-count="12600">0</span><span class="u">m²</span></span>
             <span class="stat-key">wykończonych powierzchni</span>
           </div>
           <div class="stat" data-reveal>
-            <span class="stat-val"><span data-count="140">0</span><span class="u">+</span></span>
+            <span class="stat-val"><span data-count="138">0</span><span class="u">+</span></span>
             <span class="stat-key">zrealizowanych projektów</span>
           </div>
           <div class="stat" data-reveal>
-            <span class="stat-val"><span data-count="12">0</span></span>
+            <span class="stat-val"><span data-count="11">0</span></span>
             <span class="stat-key">lat w branży budowlanej</span>
           </div>
         </div>
@@ -137,14 +137,10 @@ function formatArea(area: number | null | undefined): string | null {
         </div>
         <div class="col-body">
           <p data-reveal>
-            Specjalizujemy się w pracach wykończeniowych obiektów biurowych
-            i przemysłowych. 85% naszych realizacji to projekty B2B - znamy realia
-            przetargów, harmonogramów najmu i presji terminów.
-          </p>
-          <p data-reveal>
-            Własne zespoły suchej zabudowy i natrysku PUR, sprawdzona sieć podwykonawców
-            branżowych oraz kierownik projektu prowadzący inwestycję od pierwszego dnia
-            do odbioru. Działamy na terenie całej Wielkopolski.
+            Specjalizujemy się w pracach wykończeniowych obiektów biurowych i przemysłowych. 85% naszych realizacji to projekty B2B - znamy realia zamówień publicznych, harmonogramów najmu i presji terminów.
+Wykonujemy zabudowy i natrysku PUR, sprawdzona sieć podwykonawców branżowych oraz kierownik projektu prowadzący inwestycję od pierwszego dnia do odbioru. Działamy na terenie całej wielkopolski.
+Spółkę tworzy dwóch braci - wspólników  Maciej Szymczak oraz Szymon Szymczak.
+
           </p>
           <a class="btn" href="/o-firmie" data-reveal>Poznaj nas bliżej</a>
         </div>
@@ -172,7 +168,7 @@ function formatArea(area: number | null | undefined): string | null {
             <p>Kierownik projektu odpowiedzialny za całość - od wyceny po dokumentację powykonawczą.</p>
           </div>
           <div class="value" data-reveal>
-            <h3>Własne zespoły</h3>
+            <h3>Sprawdzone zespoły</h3>
             <p>Sucha zabudowa i natrysk PUR bez pośredników - pełna kontrola jakości i tempa prac.</p>
           </div>
           <div class="value" data-reveal>
@@ -213,8 +209,8 @@ function formatArea(area: number | null | undefined): string | null {
                     <span class="work-cat">{project.category}</span>
                     <h3>{project.title}</h3>
                     <div class="work-meta">
-                      {formatArea(project.area_m2) && <span>{formatArea(project.area_m2)}</span>}
-                      {project.duration && <span>{project.duration}</span>}
+                      {project.investor && <span>{project.investor}</span>}
+                      {project.completion_year && <span>{project.completion_year}</span>}
                     </div>
                   </div>
                 </a>

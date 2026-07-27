@@ -13,17 +13,19 @@
   <div class="editor-grid">
     <section class="panel form-stack">
       <h2>Realizacja</h2>
-      <label>Tytuł<input name="title" required value="{{ project.title if project else '' }}"></label>
-      <label>Slug<input name="slug" required pattern="[a-z0-9]+(?:-[a-z0-9]+)*" value="{{ project.slug if project else '' }}"></label>
+      <label>Tytuł<input name="title" required value="{{ project.title if project else '' }}" data-slug-source></label>
+      <label>Slug <span class="hint">generowany z tytułu, możesz poprawić</span>
+        <input name="slug" required pattern="[a-z0-9]+(?:-[a-z0-9]+)*" value="{{ project.slug if project else '' }}" data-slug-target placeholder="np. hala-biurowa-wrzesnia">
+      </label>
       <div class="two-fields">
         <label>Kategoria<input name="category" required value="{{ project.category if project else '' }}"></label>
         <label>Lokalizacja<input name="location" value="{{ project.location if project and project.location else '' }}"></label>
       </div>
       <div class="two-fields">
-        <label>Metraż (m²)<input name="area_m2" type="number" min="0" step="0.01" value="{{ project.area_m2 if project and project.area_m2 is not none else '' }}"></label>
+        <label>Inwestor<input name="investor" value="{{ project.investor if project and project.investor else '' }}" placeholder="np. Sąd Apelacyjny w Poznaniu"></label>
         <label>Czas realizacji<input name="duration" value="{{ project.duration if project and project.duration else '' }}" placeholder="np. 11 tygodni"></label>
       </div>
-      <label>Data zakończenia<input name="completion_date" type="date" value="{{ project.completion_date.isoformat() if project and project.completion_date else '' }}"></label>
+      <label>Rok ukończenia<input name="completion_year" value="{{ project.completion_year if project and project.completion_year else '' }}" placeholder="np. 2019 lub 2019/2020"></label>
       <label>Krótki opis<textarea name="excerpt" rows="4">{{ project.excerpt if project else '' }}</textarea></label>
 
       <div class="cover-editor" data-cover-editor>
@@ -65,6 +67,7 @@
             <button type="button" class="button button--small" data-add-block="list">Lista</button>
             <button type="button" class="button button--small" data-add-block="quote">Cytat</button>
             <button type="button" class="button button--small" data-add-block="image">Obraz</button>
+            <button type="button" class="button button--small" data-add-block="link">Link do realizacji</button>
           </div>
         </div>
         <div data-blocks class="block-list"></div>

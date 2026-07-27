@@ -39,7 +39,8 @@ const { project } = Astro.props;
     <section class="project-facts">
       <div class="wrap">
         {project.location && <div><span>Lokalizacja</span><strong>{project.location}</strong></div>}
-        {project.area_m2 && <div><span>Powierzchnia</span><strong>{project.area_m2} m²</strong></div>}
+        {project.investor && <div><span>Inwestor</span><strong>{project.investor}</strong></div>}
+        {project.completion_year && <div><span>Rok ukończenia</span><strong>{project.completion_year}</strong></div>}
         {project.duration && <div><span>Czas realizacji</span><strong>{project.duration}</strong></div>}
       </div>
     </section>

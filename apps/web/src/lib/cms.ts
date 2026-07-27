@@ -1,12 +1,13 @@
 import fallbackSnapshot from "../data/content-fallback.json";
 
 export type ContentBlock = {
-  type: "heading" | "paragraph" | "list" | "quote" | "image";
+  type: "heading" | "paragraph" | "list" | "quote" | "image" | "link";
   level?: 2 | 3;
   text?: string;
   items?: string[];
   src?: string;
   alt?: string;
+  url?: string;
 };
 
 export type CmsEntry = {
@@ -23,9 +24,9 @@ export type CmsProject = CmsEntry & {
   excerpt: string;
   category: string;
   location: string | null;
-  area_m2: number | null;
+  investor: string | null;
   duration: string | null;
-  completion_date: string | null;
+  completion_year: string | null;
   featured?: boolean;
   sort_order?: number;
   cover_image?: string | null;

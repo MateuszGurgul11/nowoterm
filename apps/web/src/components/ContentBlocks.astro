@@ -29,6 +29,21 @@ const { blocks = [] } = Astro.props;
       if (block.type === "image" && block.src) {
         return <img src={block.src} alt={block.alt ?? ""} loading="lazy" />;
       }
+      if (block.type === "link" && block.url) {
+        const label = block.text?.trim() || "Zobacz realizację";
+        const external = /^https?:\/\//i.test(block.url);
+        return (
+          <p class="cms-link">
+            <a
+              class="btn"
+              href={block.url}
+              {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+            >
+              {label}
+            </a>
+          </p>
+        );
+      }
       return null;
     })
   }
@@ -52,4 +67,5 @@ const { blocks = [] } = Astro.props;
     font-size: clamp(20px, 3vw, 28px);
   }
   .cms-content :global(img) { width: 100%; height: auto; margin-top: 2.4em; }
+  .cms-content :global(.cms-link) { margin-top: 2.4em; }
 </style>

@@ -142,10 +142,18 @@
         card.draggable = true;
         card.dataset.index = String(index);
 
+        var typeLabels = {
+          heading: "nagłówek",
+          paragraph: "akapit",
+          list: "lista",
+          quote: "cytat",
+          image: "obraz",
+          link: "link do realizacji",
+        };
         var head =
           '<div class="block-card__head">' +
           '<span class="block-card__type">' +
-          block.type +
+          (typeLabels[block.type] || block.type) +
           "</span>" +
           '<div class="block-card__actions">' +
           '<button type="button" data-up title="Wyżej">↑</button>' +
@@ -180,6 +188,14 @@
             '</div><button type="button" class="button button--small" data-pick-image>Wybierz obraz</button>' +
             '<label>Alt<input data-field="alt" value="' +
             (block.alt || "") +
+            '"></label>';
+        } else if (block.type === "link") {
+          body =
+            '<label>Adres URL<input data-field="url" type="url" placeholder="https://…" value="' +
+            (block.url || "").replace(/"/g, "&quot;") +
+            '"></label>' +
+            '<label>Tekst przycisku<input data-field="text" placeholder="Zobacz realizację" value="' +
+            (block.text || "").replace(/"/g, "&quot;") +
             '"></label>';
         } else {
           body =
@@ -252,6 +268,9 @@
         } else if (type === "image") {
           block.src = "";
           block.alt = "";
+        } else if (type === "link") {
+          block.url = "";
+          block.text = "Zobacz realizację";
         } else {
           block.text = "";
         }
@@ -606,6 +625,55 @@
     });
   }
 
+  function slugify(value) {
+    var map = {
+      ą: "a",
+      ć: "c",
+      ę: "e",
+      ł: "l",
+      ń: "n",
+      ó: "o",
+      ś: "s",
+      ź: "z",
+      ż: "z",
+      Ä: "a",
+      Ö: "o",
+      Ü: "u",
+      ä: "a",
+      ö: "o",
+      ü: "u",
+      ß: "ss",
+    };
+    return String(value || "")
+      .toLowerCase()
+      .split("")
+      .map(function (ch) {
+        return map[ch] || ch;
+      })
+      .join("")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .replace(/-{2,}/g, "-")
+      .slice(0, 120);
+  }
+
+  function initAutoSlug() {
+    var source = document.querySelector("[data-slug-source]");
+    var target = document.querySelector("[data-slug-target]");
+    if (!source || !target) return;
+
+    var manual = Boolean(target.value);
+    target.addEventListener("input", function () {
+      manual = Boolean(target.value.trim());
+    });
+    source.addEventListener("input", function () {
+      if (manual) return;
+      target.value = slugify(source.value);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("[data-block-editor]").forEach(initBlockEditor);
     document.querySelectorAll("[data-gallery-editor]").forEach(initGalleryEditor);
@@ -614,5 +682,6 @@
     initProjectSortable();
     initMediaUpload();
     initDashboardDelete();
+    initAutoSlug();
   });
 })();

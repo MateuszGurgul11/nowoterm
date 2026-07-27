@@ -1,18 +1,15 @@
 import uuid
-from datetime import date, datetime
-from decimal import Decimal
+from datetime import datetime
 from enum import StrEnum
 from typing import Any
 
 from sqlalchemy import (
     ARRAY,
     Boolean,
-    Date,
     DateTime,
     Enum,
     ForeignKey,
     Integer,
-    Numeric,
     String,
     Text,
     text,
@@ -120,9 +117,9 @@ class Project(PublishableMixin, Base):
     excerpt: Mapped[str] = mapped_column(Text, default="")
     category: Mapped[str] = mapped_column(Text)
     location: Mapped[str | None] = mapped_column(Text)
-    area_m2: Mapped[Decimal | None] = mapped_column(Numeric(12, 2))
+    investor: Mapped[str | None] = mapped_column(Text)
     duration: Mapped[str | None] = mapped_column(Text)
-    completion_date: Mapped[date | None] = mapped_column(Date)
+    completion_year: Mapped[str | None] = mapped_column(Text)
     featured: Mapped[bool] = mapped_column(Boolean, default=False)
     sort_order: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
     cover_image_id: Mapped[uuid.UUID | None] = mapped_column(

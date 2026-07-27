@@ -2,7 +2,7 @@
 -- Idempotentny: upsert po slug
 
 insert into public.projects (
-  slug, title, excerpt, category, location, area_m2, duration,
+  slug, title, excerpt, category, location, investor, duration, completion_year,
   featured, gallery, content, seo_title, seo_description,
   status, published_at
 )
@@ -13,8 +13,9 @@ values
   '860 m² powierzchni biurowo-socjalnej: od stanu surowego do przekazania najemcy w 11 tygodni.',
   'Hale biurowe',
   'Września',
-  860,
+  null,
   '11 tygodni',
+  null,
   true,
   '[]'::jsonb,
   '{
@@ -41,8 +42,9 @@ values
   'Generalne wykonawstwo budynku usługowo-biurowego o powierzchni 1 450 m² w Poznaniu.',
   'Budynki usługowe',
   'Poznań',
-  1450,
+  null,
   'generalne wykonawstwo',
+  null,
   true,
   '[]'::jsonb,
   '{
@@ -67,8 +69,9 @@ values
   'Natrysk piany poliuretanowej na hali magazynowej o powierzchni 3 200 m² w Gnieźnie.',
   'Obiekty przemysłowe',
   'Gniezno',
-  3200,
+  null,
   'natrysk PUR',
+  null,
   true,
   '[]'::jsonb,
   '{
@@ -92,8 +95,9 @@ values
   'Sucha zabudowa open space z zapleczem konferencyjnym — 620 m² w Poznaniu.',
   'Hale biurowe',
   'Poznań',
-  620,
+  null,
   'sucha zabudowa',
+  null,
   false,
   '[]'::jsonb,
   '{
@@ -112,8 +116,9 @@ values
   'Wykończenie pawilonu usługowego z częścią biurową — 1 100 m² we Wrześni, pod klucz.',
   'Budynki usługowe',
   'Września',
-  1100,
+  null,
   'pod klucz',
+  null,
   false,
   '[]'::jsonb,
   '{
@@ -132,8 +137,9 @@ values
   'Modernizacja zaplecza socjalnego 480 m² w Koninie — prace w reżimie działającego zakładu.',
   'Obiekty przemysłowe',
   'Konin',
-  480,
+  null,
   'praca w reżimie zakładu',
+  null,
   false,
   '[]'::jsonb,
   '{
@@ -152,8 +158,9 @@ values
   'Termoizolacja dachu hali produkcyjnej 2 700 m² w Środzie Wielkopolskiej (λ 0,022).',
   'Izolacje PUR',
   'Środa Wlkp.',
-  2700,
+  null,
   'λ 0,022',
+  null,
   false,
   '[]'::jsonb,
   '{
@@ -172,8 +179,9 @@ values
   'Adaptacja piętra biurowego hali logistycznej — 740 m² w Gnieźnie, realizacja w 9 tygodni.',
   'Hale biurowe',
   'Gniezno',
-  740,
+  null,
   '9 tygodni',
+  null,
   false,
   '[]'::jsonb,
   '{
@@ -192,8 +200,9 @@ values
   'Ocieplenie poddasza obiektu usługowego 390 m² we Wrześni pianą otwartokomórkową.',
   'Izolacje PUR',
   'Września',
-  390,
+  null,
   'piana otwartokomórkowa',
+  null,
   false,
   '[]'::jsonb,
   '{
@@ -211,8 +220,9 @@ on conflict (slug) do update set
   excerpt = excluded.excerpt,
   category = excluded.category,
   location = excluded.location,
-  area_m2 = excluded.area_m2,
+  investor = excluded.investor,
   duration = excluded.duration,
+  completion_year = excluded.completion_year,
   featured = excluded.featured,
   content = excluded.content,
   seo_title = excluded.seo_title,
