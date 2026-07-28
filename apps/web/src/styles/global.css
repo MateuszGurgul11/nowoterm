@@ -463,7 +463,6 @@ blockquote.quote footer { font-size: 18px; font-style: normal; letter-spacing: 0
 .work-cat { font-size: 18px; font-weight: 250; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); }
 .work h3 { font-size: var(--text-base); font-weight: 250; line-height: 1.35; }
 .work-meta { font-size: var(--text-base); color: var(--muted); display: flex; gap: 8px; flex-wrap: wrap; }
-.work-meta span + span::before { content: "Â·"; margin-right: 8px; color: var(--line); }
 
 /* ---------- proces ---------- */
 .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: clamp(28px, 3vw, 44px); }
