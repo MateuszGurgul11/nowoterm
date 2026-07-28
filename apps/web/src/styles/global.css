@@ -21,6 +21,9 @@
   --font: "Jost", "Helvetica Neue", Arial, sans-serif;
   --header-h: 92px;
   --pad: clamp(24px, 5vw, 72px);
+  --text-base: 18px;
+  --text-lead: 18px;
+  --text-ui: 18px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,7 +34,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font);
-  font-size: 18px;
+  font-size: var(--text-base);
   font-weight: 250;
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
@@ -58,7 +61,7 @@ button { font: inherit; cursor: pointer; background: none; border: 0; color: inh
 }
 
 .label {
-  font-size: 18px;
+  font-size: var(--text-ui);
   font-weight: 250;
   letter-spacing: 0.42em;
   text-transform: uppercase;
@@ -73,12 +76,12 @@ h1, h2, h3, h4 { font-weight: 250; line-height: 1.18; text-wrap: balance; }
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
-.h-xl { font-size: clamp(32px, 4.4vw, 60px); font-weight: 250; letter-spacing: 0.02em; }
-.h-lg { font-size: clamp(26px, 3.2vw, 44px); font-weight: 250; letter-spacing: 0.02em; }
+.h-xl { font-size: clamp(34px, 3vw, 56px); font-weight: 250; letter-spacing: 0.02em; }
+.h-lg { font-size: clamp(28px, 2.2vw, 44px); font-weight: 250; letter-spacing: 0.02em; }
 .h-md { font-size: clamp(20px, 2vw, 27px); font-weight: 250; }
 
 .lead {
-  font-size: clamp(18px, 1.5vw, 20px);
+  font-size: var(--text-lead);
   color: var(--ink-soft);
   max-width: 60ch;
 }
@@ -99,7 +102,7 @@ h1, h2, h3, h4 { font-weight: 250; line-height: 1.18; text-wrap: balance; }
   align-items: center;
   gap: 14px;
   padding: 16px 38px;
-  font-size: 18px;
+  font-size: var(--text-ui);
   font-weight: 250;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -118,7 +121,7 @@ h1, h2, h3, h4 { font-weight: 250; line-height: 1.18; text-wrap: balance; }
 
 .link-more {
   display: inline-flex; align-items: center; gap: 10px;
-  font-size: 18px; font-weight: 250; letter-spacing: 0.26em; text-transform: uppercase;
+  font-size: var(--text-ui); font-weight: 250; letter-spacing: 0.26em; text-transform: uppercase;
   color: var(--ink);
   padding-bottom: 6px;
   border-bottom: 1px solid var(--line);
@@ -286,7 +289,7 @@ body.nav-open .nav-toggle::after { top: 21px; transform: rotate(-45deg); }
   position: absolute; top: calc(var(--header-h) + 26px); right: var(--pad);
   z-index: 2;
   max-width: 300px; text-align: right;
-  font-size: 18px; font-weight: 250; line-height: 1.7;
+  font-size: var(--text-base); font-weight: 250; line-height: 1.7;
   color: #fff;
 }
 .hero-note b { color: var(--accent); font-weight: 400; }
@@ -324,7 +327,7 @@ body.nav-open .nav-toggle::after { top: 21px; transform: rotate(-45deg); }
 
 .hero-tag {
   margin-top: 8px;
-  font-size: clamp(18px, 1.6vw, 19px);
+  font-size: var(--text-base);
   font-weight: 250;
   letter-spacing: 0.06em;
   color: #fff;
@@ -373,7 +376,7 @@ blockquote.quote footer { font-size: 18px; font-style: normal; letter-spacing: 0
 .pillar:hover::before { width: 64px; }
 .pillar-no { font-size: 18px; font-weight: 250; letter-spacing: 0.3em; color: var(--accent); }
 .pillar h3 { font-size: 21px; font-weight: 250; letter-spacing: 0.04em; }
-.pillar p { font-size: 18px; color: var(--ink-soft); }
+.pillar p { font-size: var(--text-base); color: var(--ink-soft); }
 .pillar .link-more { margin-top: 6px; justify-self: start; }
 
 /* ---------- pas liczb (dark) ---------- */
@@ -403,7 +406,7 @@ blockquote.quote footer { font-size: 18px; font-style: normal; letter-spacing: 0
 /* ---------- o nas / two-col ---------- */
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(48px, 7vw, 110px); align-items: start; }
 .two-col .col-head { display: grid; gap: 22px; }
-.two-col .col-body { display: grid; gap: 22px; font-size: 18px; color: var(--ink-soft); }
+.two-col .col-body { display: grid; gap: 22px; font-size: var(--text-base); color: var(--ink-soft); }
 .two-col .col-body .btn { justify-self: start; margin-top: 10px; }
 
 /* ---------- media placeholders ---------- */
@@ -427,7 +430,7 @@ blockquote.quote footer { font-size: 18px; font-style: normal; letter-spacing: 0
 .value { display: grid; gap: 14px; align-content: start; text-align: center; justify-items: center; }
 .value::before { content: ""; width: 34px; height: 1px; background: var(--accent); margin-bottom: 8px; }
 .value h3 { font-size: 18px; font-weight: 250; letter-spacing: 0.1em; text-transform: uppercase; }
-.value p { font-size: 18px; color: var(--ink-soft); max-width: 34ch; }
+.value p { font-size: var(--text-base); color: var(--ink-soft); max-width: 34ch; }
 
 /* ---------- realizacje ---------- */
 .filters { display: flex; flex-wrap: wrap; gap: 8px 28px; justify-content: center; }
@@ -458,8 +461,8 @@ blockquote.quote footer { font-size: 18px; font-style: normal; letter-spacing: 0
 .work:hover .work-media img { transform: scale(1.05); }
 .work-body { padding: 22px 4px 0; display: grid; gap: 7px; }
 .work-cat { font-size: 18px; font-weight: 250; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); }
-.work h3 { font-size: 18.5px; font-weight: 250; line-height: 1.35; }
-.work-meta { font-size: 18px; color: var(--muted); display: flex; gap: 8px; flex-wrap: wrap; }
+.work h3 { font-size: var(--text-base); font-weight: 250; line-height: 1.35; }
+.work-meta { font-size: var(--text-base); color: var(--muted); display: flex; gap: 8px; flex-wrap: wrap; }
 .work-meta span + span::before { content: "Â·"; margin-right: 8px; color: var(--line); }
 
 /* ---------- proces ---------- */
@@ -474,7 +477,7 @@ blockquote.quote footer { font-size: 18px; font-style: normal; letter-spacing: 0
   line-height: 1;
 }
 .step h3 { font-size: 18px; font-weight: 250; letter-spacing: 0.14em; text-transform: uppercase; }
-.step p { font-size: 18px; color: var(--ink-soft); max-width: 30ch; }
+.step p { font-size: var(--text-base); color: var(--ink-soft); max-width: 30ch; }
 
 /* ---------- listy zakresu ---------- */
 .scope-list { display: grid; }
@@ -485,19 +488,19 @@ blockquote.quote footer { font-size: 18px; font-style: normal; letter-spacing: 0
 }
 .scope-item:first-child { border-top: 1px solid var(--line); }
 .scope-item .no { font-size: 18px; font-weight: 250; color: var(--muted); letter-spacing: 0.1em; }
-.scope-item .name { font-size: 18px; font-weight: 250; }
+.scope-item .name { font-size: var(--text-base); font-weight: 250; }
 .scope-item .tag { font-size: 18px; font-weight: 250; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); }
 
 .check-list { display: grid; gap: 18px; }
 .check-list li {
   display: grid; grid-template-columns: 26px 1fr; gap: 16px; align-items: baseline;
-  font-size: 18px; color: var(--ink-soft);
+  font-size: var(--text-base); color: var(--ink-soft);
 }
 .check-list li::before { content: ""; width: 18px; height: 1px; background: var(--accent); align-self: center; }
 .check-list b { color: var(--ink); font-weight: 250; }
 
 /* ---------- tabela specyfikacji ---------- */
-.spec-table { width: 100%; border-collapse: collapse; font-size: 18px; }
+.spec-table { width: 100%; border-collapse: collapse; font-size: var(--text-base); }
 .spec-table th, .spec-table td { text-align: left; padding: 20px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .spec-table tr:first-child th, .spec-table tr:first-child td { border-top: 1px solid var(--line); }
 .spec-table th { font-size: 18px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted); width: 240px; font-weight: 250; }
@@ -508,7 +511,7 @@ blockquote.quote footer { font-size: 18px; font-style: normal; letter-spacing: 0
 .info-card { display: grid; gap: 12px; align-content: start; padding-top: 26px; border-top: 1px solid var(--line); }
 .info-card .ic-label { font-size: 18px; font-weight: 250; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); }
 .info-card h3 { font-size: 19px; font-weight: 250; }
-.info-card p { font-size: 18px; color: var(--ink-soft); }
+.info-card p { font-size: var(--text-base); color: var(--ink-soft); }
 
 /* ---------- CTA ---------- */
 .cta-band {
@@ -537,7 +540,7 @@ blockquote.quote footer { font-size: 18px; font-style: normal; letter-spacing: 0
 }
 .page-hero .crumbs a:hover { color: var(--dark-text); }
 .page-hero .crumbs .sep { color: var(--accent); }
-.page-hero h1 { font-size: clamp(32px, 4.6vw, 62px); font-weight: 250; letter-spacing: 0.06em; max-width: 22ch; margin-inline: auto; }
+.page-hero h1 { font-size: clamp(34px, 3.2vw, 58px); font-weight: 250; letter-spacing: 0.06em; max-width: 22ch; margin-inline: auto; }
 .page-hero .lead { color: var(--dark-muted); margin: 26px auto 0; }
 .page-hero .rule { margin: 30px auto 0; }
 
@@ -548,7 +551,7 @@ blockquote.quote footer { font-size: 18px; font-style: normal; letter-spacing: 0
 .contact-line .cl-key { font-size: 18px; font-weight: 250; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent); }
 .contact-line a, .contact-line span { font-size: clamp(20px, 2vw, 26px); font-weight: 250; letter-spacing: 0.02em; }
 .contact-line a:hover { color: var(--accent); }
-.contact-line small { color: var(--muted); font-size: 18px; }
+.contact-line small { color: var(--muted); font-size: var(--text-base); }
 
 .form { display: grid; gap: 26px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
@@ -561,7 +564,7 @@ blockquote.quote footer { font-size: 18px; font-style: normal; letter-spacing: 0
   background: transparent;
   border: 0; border-bottom: 1px solid var(--line);
   color: var(--ink);
-  font: inherit; font-size: 18px; font-weight: 250;
+  font: inherit; font-size: var(--text-base); font-weight: 250;
   padding: 10px 2px 12px;
   transition: border-color 0.25s;
   border-radius: 0;
@@ -570,10 +573,10 @@ blockquote.quote footer { font-size: 18px; font-style: normal; letter-spacing: 0
 .field select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 16px) 55%, calc(100% - 10px) 55%; background-size: 6px 6px; background-repeat: no-repeat; }
 .field textarea { min-height: 120px; resize: vertical; }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
-.form-note { font-size: 18px; color: var(--muted); }
+.form-note { font-size: var(--text-base); color: var(--muted); }
 .form-success {
   border: 1px solid var(--accent);
-  padding: 20px 24px; font-size: 18px; color: var(--ink-soft);
+  padding: 20px 24px; font-size: var(--text-base); color: var(--ink-soft);
   display: none;
 }
 .form-success.is-visible { display: block; }
@@ -586,25 +589,33 @@ blockquote.quote footer { font-size: 18px; font-style: normal; letter-spacing: 0
   padding-block: clamp(64px, 8vw, 110px);
 }
 .footer h4 { font-size: 18px; font-weight: 250; letter-spacing: 0.34em; text-transform: uppercase; color: var(--dark-muted); margin-bottom: 22px; }
-.footer a { color: var(--dark-muted); transition: color 0.25s; font-size: 18px; font-weight: 250; }
+.footer a { color: var(--dark-muted); transition: color 0.25s; font-size: var(--text-base); font-weight: 250; }
 .footer a:hover { color: var(--dark-text); }
 .footer li { margin-bottom: 12px; }
 .footer-brand .b-name { font-size: 19px; font-weight: 250; letter-spacing: 0.34em; text-transform: uppercase; }
 .footer-brand .b-sub { font-size: 18px; letter-spacing: 0.52em; text-transform: uppercase; color: var(--dark-muted); margin-top: 4px; }
-.footer-brand p { color: var(--dark-muted); font-size: 18px; max-width: 32ch; margin-top: 20px; font-weight: 250; }
-.footer-contact li { font-size: 18px; color: var(--dark-muted); font-weight: 250; }
-.footer-contact b { color: var(--dark-text); font-weight: 250; font-size: 18px; letter-spacing: 0.04em; }
+.footer-brand p { color: var(--dark-muted); font-size: var(--text-base); max-width: 32ch; margin-top: 20px; font-weight: 250; }
+.footer-contact li { font-size: var(--text-base); color: var(--dark-muted); font-weight: 250; }
+.footer-contact b { color: var(--dark-text); font-weight: 250; font-size: var(--text-base); letter-spacing: 0.04em; }
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-block: 26px;
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
-  font-size: 18px; letter-spacing: 0.08em; color: var(--dark-muted); font-weight: 250;
+  font-size: var(--text-base); letter-spacing: 0.08em; color: var(--dark-muted); font-weight: 250;
   overflow-wrap: anywhere;
 }
 
 /* ---------- reveal (GSAP) ---------- */
 [data-reveal] { opacity: 0; transform: translateY(28px); will-change: transform, opacity; }
 .no-js [data-reveal], .reduced-motion [data-reveal] { opacity: 1; transform: none; }
+
+/* ---------- laptop typography ---------- */
+@media (min-width: 1024px) {
+  :root {
+    --text-base: 20px;
+    --text-lead: 20px;
+  }
+}
 
 /* ---------- responsive ---------- */
 body.nav-open { overflow: hidden; }
