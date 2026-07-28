@@ -659,7 +659,12 @@ body.nav-open { overflow: hidden; }
   }
   .nav-drop:hover .nav-drop-menu,
   .nav-drop:focus-within .nav-drop-menu { transform: none; }
-  .nav-drop.is-open .nav-drop-menu { display: grid; }
+  .nav-drop.is-open .nav-drop-menu {
+    display: grid;
+    max-height: min(52vh, 420px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
   .nav-drop-menu a {
     font-size: 18px;
     padding: 10px 0;
