@@ -6,9 +6,9 @@
     "company_name": "Novoterm Budownictwo",
     "phone": "+48 726 324 514",
     "email": "biuro@novoterm-budownictwo.pl",
-    "street": "ul. Ciemierów 10",
-    "postal_code": "62-310",
-    "city": "Pyzdry",
+    "street": "Jana Pawła II 11/1",
+    "postal_code": "62-300",
+    "city": "Września",
     "region": "Wielkopolskie",
     "social_links": {},
     "default_seo_title": "Novoterm Budownictwo",
@@ -23,11 +23,11 @@
       "email": "biuro@novoterm-budownictwo.pl",
       "address": {
         "@type": "PostalAddress",
-        "postalCode": "62-310",
+        "postalCode": "62-300",
         "addressRegion": "Wielkopolskie",
-        "streetAddress": "ul. Ciemierów 10",
+        "streetAddress": "Jana Pawła II 11/1",
         "addressCountry": "PL",
-        "addressLocality": "Pyzdry"
+        "addressLocality": "Września"
       },
       "@context": "https://schema.org",
       "telephone": "+48726324514"

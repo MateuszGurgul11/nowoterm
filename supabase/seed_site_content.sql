@@ -369,9 +369,9 @@ set
   company_name = 'Novoterm Budownictwo',
   phone = '+48 726 324 514',
   email = 'biuro@novoterm-budownictwo.pl',
-  street = 'ul. Ciemierów 10',
-  postal_code = '62-310',
-  city = 'Pyzdry',
+  street = 'Jana Pawła II 11/1',
+  postal_code = '62-300',
+  city = 'Września',
   region = 'Wielkopolskie',
   default_seo_title = 'Novoterm Budownictwo',
   default_seo_description = 'Generalny wykonawca prac wykończeniowych obiektów biurowych i przemysłowych w Wielkopolsce.',
@@ -383,9 +383,9 @@ set
     "email": "biuro@novoterm-budownictwo.pl",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "ul. Ciemierów 10",
-      "postalCode": "62-310",
-      "addressLocality": "Pyzdry",
+      "streetAddress": "Jana Pawła II 11/1",
+      "postalCode": "62-300",
+      "addressLocality": "Września",
       "addressRegion": "Wielkopolskie",
       "addressCountry": "PL"
     }

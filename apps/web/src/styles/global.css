@@ -601,18 +601,49 @@ blockquote.quote footer { font-size: 18px; font-style: normal; letter-spacing: 0
 .footer a { color: var(--dark-muted); transition: color 0.25s; font-size: var(--text-base); font-weight: 250; }
 .footer a:hover { color: var(--dark-text); }
 .footer li { margin-bottom: 12px; }
-.footer-brand .b-name { font-size: 19px; font-weight: 250; letter-spacing: 0.34em; text-transform: uppercase; }
-.footer-brand .b-sub { font-size: 18px; letter-spacing: 0.52em; text-transform: uppercase; color: var(--dark-muted); margin-top: 4px; }
+.footer-brand .footer-brand-logo {
+  display: inline-block;
+  line-height: 0;
+}
+.footer-brand .footer-brand-logo img {
+  display: block;
+  height: 56px;
+  width: auto;
+  max-width: min(280px, 100%);
+  object-fit: contain;
+  object-position: left center;
+}
 .footer-brand p { color: var(--dark-muted); font-size: var(--text-base); max-width: 32ch; margin-top: 20px; font-weight: 250; }
 .footer-contact li { font-size: var(--text-base); color: var(--dark-muted); font-weight: 250; }
 .footer-contact b { color: var(--dark-text); font-weight: 250; font-size: var(--text-base); letter-spacing: 0.04em; }
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-block: 26px;
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;
-  font-size: var(--text-base); letter-spacing: 0.08em; color: var(--dark-muted); font-weight: 250;
-  overflow-wrap: anywhere;
+  font-size: var(--text-base);
+  letter-spacing: 0.08em;
+  color: var(--dark-muted);
+  font-weight: 250;
 }
+.footer-bottom-line {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75em 1.1em;
+  margin: 0;
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.footer-bottom-line::-webkit-scrollbar { display: none; }
+.footer-bottom-logo {
+  display: block;
+  height: 1.35em;
+  width: auto;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+.footer-bottom-sep { opacity: 0.45; }
 
 /* ---------- reveal (GSAP) ---------- */
 [data-reveal] { opacity: 0; transform: translateY(28px); will-change: transform, opacity; }
