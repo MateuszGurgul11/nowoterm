@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import { getContentSnapshot } from "../lib/cms";
 
 const title = "Novoterm Budownictwo - Generalny wykonawca wykończeń obiektów biurowych i przemysłowych | Wielkopolska";
-const description = "Generalny wykonawca prac wykończeniowych obiektów biurowych i przemysłowych. Hale biurowe, budynki usługowe do 2000 m² pod klucz, izolacje PUR, sucha zabudowa. Wielkopolska - Września, Poznań.";
+const description = "Generalny wykonawca prac wykończeniowych obiektów biurowych i przemysłowych. Powierzchnie biurowe, budynki usługowe do 2000 m² pod klucz, izolacje PUR, sucha zabudowa. Wielkopolska - Września, Poznań.";
 
 const { projects } = await getContentSnapshot();
 const featured = projects.filter((p) => p.featured).slice(0, 3);
@@ -26,7 +26,7 @@ const featured = projects.filter((p) => p.featured).slice(0, 3);
 
       <p class="hero-note" data-hero>
         Generalny wykonawca wykończeń obiektów komercyjnych.<br>
-        <b>Hale biurowe to nasza specjalność.</b>
+        <b>Powierzchnie biurowe to nasza specjalność.</b>
       </p>
 
       <div class="hero-center">
@@ -87,7 +87,7 @@ const featured = projects.filter((p) => p.featured).slice(0, 3);
             <h3>Powierzchnie biurowe</h3>
             <p>Nasza kompetencja flagowa - wykończenia powierzchni biurowych w obiektach
                halowych i przemysłowych. Od stanu surowego po przekazanie najemcy.</p>
-            <a class="link-more" href="/specjalizacje-hale-biurowe">Więcej</a>
+            <a class="link-more" href="/specjalizacje-powierzchnie-biurowe">Więcej</a>
           </article>
           <article class="pillar" data-reveal>
             <span class="pillar-no">03</span>
