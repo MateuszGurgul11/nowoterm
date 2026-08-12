@@ -1,0 +1,25 @@
+name: Supabase keepalive
+
+on:
+  schedule:
+    # Codziennie 04:17 UTC (~06:17 PL zimą) — nie o pełnej godzinie
+    - cron: "17 4 * * *"
+  workflow_dispatch: # ręczne uruchomienie z zakładki Actions
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ping CMS /health/ready (SELECT 1)
+        env:
+          CMS_READY_URL: ${{ vars.CMS_READY_URL }}
+        run: |
+          set -euo pipefail
+          URL="${CMS_READY_URL:-https://novoterm-cms.onrender.com/health/ready}"
+          # Render Free cold start bywa długi
+          curl -fsS --retry 5 --retry-delay 10 --retry-all-errors \
+            --connect-timeout 30 --max-time 120 \
+            "$URL" | tee /tmp/ready.json
+          grep -q '"status":"ready"' /tmp/ready.json \
+            || grep -q '"status": "ready"' /tmp/ready.json
